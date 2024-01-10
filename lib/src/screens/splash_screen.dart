@@ -35,7 +35,12 @@ class SsplasScreenhState extends State<SplashScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [Lottie.asset(SplashScreen._animation)],
+        children: [
+          Transform.scale(
+            scale: 1.3,
+            child: Lottie.asset(SplashScreen._animation),
+          ),
+        ],
       ),
     );
   }
