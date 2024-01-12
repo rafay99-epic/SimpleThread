@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/compoents/my_button.dart';
 import 'package:simplethread/src/compoents/my_textfeild.dart';
 
@@ -8,7 +8,6 @@ class login_page extends StatelessWidget {
   //email and Passwor Controller
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
-  final String _animation = 'assets/animation/login_message.json';
   login_page({super.key, this.onTap});
 
   //login function
@@ -25,12 +24,17 @@ class login_page extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //logo
-            Lottie.asset(
-              _animation,
-              width: 200,
-              height: 200,
-              fit: BoxFit.fill,
+            //Intro text
+            Text(
+              'Login',
+              style: GoogleFonts.playfairDisplay(
+                textStyle: TextStyle(
+                  letterSpacing: .5,
+                  fontSize: 42,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
             ),
             //Welcome Back Messaage
             Text(
@@ -49,6 +53,7 @@ class login_page extends StatelessWidget {
               hintText: "Email",
               obsuretext: false,
               controller: _emailController,
+              icons: Icons.email_rounded,
             ),
             const SizedBox(
               height: 10,
@@ -58,6 +63,7 @@ class login_page extends StatelessWidget {
               hintText: "Password",
               obsuretext: true,
               controller: _pwController,
+              icons: Icons.password_rounded,
             ),
             const SizedBox(
               height: 25,

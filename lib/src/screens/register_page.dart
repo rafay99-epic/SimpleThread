@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/compoents/my_button.dart';
 import 'package:simplethread/src/compoents/my_textfeild.dart';
 
@@ -7,7 +7,7 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
   final TextEditingController _confirmPwController = TextEditingController();
-  final String _animation = "assets/animation/register.json";
+  // final String _animation = "assets/animation/register.json";
   // final String _imageLogo = 'assets/images/register.png';
   RegisterPage({super.key, this.onTap});
   //register User
@@ -24,9 +24,18 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //logo
-            Lottie.asset(_animation),
-
+            //Intro text
+            Text(
+              'Sign Up',
+              style: GoogleFonts.playfairDisplay(
+                textStyle: TextStyle(
+                  letterSpacing: .5,
+                  fontSize: 42,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -47,6 +56,7 @@ class RegisterPage extends StatelessWidget {
               hintText: "Email",
               obsuretext: false,
               controller: _emailController,
+              icons: Icons.email_rounded,
             ),
             const SizedBox(
               height: 10,
@@ -56,6 +66,7 @@ class RegisterPage extends StatelessWidget {
               hintText: "Password",
               obsuretext: true,
               controller: _pwController,
+              icons: Icons.password_rounded,
             ),
             const SizedBox(
               height: 10,
@@ -65,6 +76,7 @@ class RegisterPage extends StatelessWidget {
               hintText: "Confirm password",
               obsuretext: true,
               controller: _confirmPwController,
+              icons: Icons.password_rounded,
             ),
 
             const SizedBox(
