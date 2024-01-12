@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:simplethread/src/compoents/my_appbar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  void logout() {}
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),
-        actions: [
-          IconButton(
-            onPressed: logout,
-            icon: const Icon(Icons.logout_rounded),
-          ),
-        ],
+    return const Scaffold(
+      appBar: MyAppBar(
+        title: 'Home',
+        icon: Icons.home_rounded,
       ),
     );
   }
