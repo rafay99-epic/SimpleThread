@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:simplethread/src/auth/login_or_register.dart';
+import 'package:simplethread/src/auth/auth_gate.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,8 +22,7 @@ class SsplasScreenhState extends State<SplashScreen> {
       Navigator.pushReplacement(
           context,
           PageTransition(
-            // child: login_page(),
-            child: const LoginOrRegister(),
+            child: const AuthGate(),
             type: PageTransitionType.rightToLeftWithFade,
             duration: const Duration(seconds: 1, milliseconds: 50),
           ));

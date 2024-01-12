@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simplethread/src/auth/auth_service.dart';
 import 'package:simplethread/src/compoents/my_button.dart';
 import 'package:simplethread/src/compoents/my_textfeild.dart';
 
@@ -11,7 +12,28 @@ class login_page extends StatelessWidget {
   login_page({super.key, this.onTap});
 
   //login function
-  void login() {}
+  void login(BuildContext context) async {
+    //get auth service
+    final authiService = AuthService();
+
+    //try login
+    try {
+      await authiService.signInWithEmailPassword(
+        _emailController.text,
+        _pwController.text,
+      );
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(e.toString()),
+        ),
+      );
+    }
+
+    //catch error
+  }
 
   //on tap register page
   final void Function()? onTap;
@@ -71,7 +93,7 @@ class login_page extends StatelessWidget {
             //login Button
             MyButton(
               text: "Login",
-              onTap: login,
+              onTap: () => login(context),
             ),
             const SizedBox(
               height: 15,
