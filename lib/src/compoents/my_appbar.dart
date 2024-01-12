@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simplethread/src/auth/auth_service.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   //parameters for the app bar
@@ -7,7 +8,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData icon;
 
   //logout from the application
-  void logout() {}
+  void logout() {
+    final _auth = AuthService();
+    _auth.signOut();
+  }
 
   const MyAppBar({
     super.key,
