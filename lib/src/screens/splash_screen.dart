@@ -24,8 +24,8 @@ class SsplasScreenhState extends State<SplashScreen> {
           PageTransition(
             // child: login_page(),
             child: const LoginOrRegister(),
-            type: PageTransitionType.fade,
-            duration: const Duration(seconds: 2, milliseconds: 30),
+            type: PageTransitionType.rightToLeftWithFade,
+            duration: const Duration(seconds: 1, milliseconds: 50),
           ));
     });
   }
