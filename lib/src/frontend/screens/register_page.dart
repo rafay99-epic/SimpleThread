@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simplethread/src/compoents/my_button.dart';
-import 'package:simplethread/src/compoents/my_textfeild.dart';
+import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+
+import '../compoents/my_button.dart';
+import '../compoents/my_textfeild.dart';
 
 class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -11,7 +13,44 @@ class RegisterPage extends StatelessWidget {
   // final String _imageLogo = 'assets/images/register.png';
   RegisterPage({super.key, this.onTap});
   //register User
-  void register() {}
+  void register(BuildContext context) {
+    final _auth = AuthService();
+    // pass match -> create User
+    if (_pwController.text == _confirmPwController.text) {
+      try {
+        _auth.signUpWithEmailPassword(
+          _emailController.text,
+          _pwController.text,
+        );
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(
+              e.toString(),
+              style: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          ),
+        );
+      }
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            "Verify Password Is Not Matching",
+            style: GoogleFonts.playfairDisplay(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+        ),
+      );
+    }
+  }
 
   //on tap to redirect to login Page
   final void Function()? onTap;
@@ -85,7 +124,7 @@ class RegisterPage extends StatelessWidget {
             //login Button
             MyButton(
               text: "Register",
-              onTap: register,
+              onTap: () => register(context),
             ),
             const SizedBox(
               height: 15,

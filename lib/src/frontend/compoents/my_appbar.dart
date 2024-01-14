@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simplethread/src/auth/auth_service.dart';
+import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   //parameters for the app bar
   final String title;
-  final IconData icon;
+  // final IconData icon;
 
   //logout from the application
   void logout() {
@@ -16,7 +16,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({
     super.key,
     required this.title,
-    required this.icon,
+    // required this.icon,
   });
   //Define the size and making sure that the size of the app bar is perfect
   @override
@@ -26,10 +26,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Icon(
-        icon,
-        color: Theme.of(context).colorScheme.primary,
-      ),
+      // leading: Icon(
+      //   icon,
+      //   color: Theme.of(context).colorScheme.primary,
+      // ),
       centerTitle: true,
       title: Text(
         title,

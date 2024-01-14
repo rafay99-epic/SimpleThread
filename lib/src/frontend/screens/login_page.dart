@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simplethread/src/auth/auth_service.dart';
-import 'package:simplethread/src/compoents/my_button.dart';
-import 'package:simplethread/src/compoents/my_textfeild.dart';
+import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+import 'package:simplethread/src/frontend/compoents/my_button.dart';
+import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
 
 // ignore: camel_case_types
 class login_page extends StatelessWidget {
@@ -27,7 +27,13 @@ class login_page extends StatelessWidget {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(e.toString()),
+          title: Text(
+            e.toString(),
+            style: GoogleFonts.playfairDisplay(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
         ),
       );
     }

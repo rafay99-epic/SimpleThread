@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:simplethread/firebase_options.dart';
-import 'package:simplethread/src/screens/splash_screen.dart';
-import 'package:simplethread/theme/light_mode.dart';
+import 'package:simplethread/src/frontend/screens/splash_screen.dart';
+import 'package:simplethread/src/frontend/theme/light_mode.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

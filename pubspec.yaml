@@ -40,6 +40,7 @@ dependencies:
   firebase_core: ^2.24.2
   google_fonts: ^6.1.0
   firebase_auth: ^4.16.0
+  hidden_drawer_menu: ^3.0.1
 
 dev_dependencies:
   flutter_test:
