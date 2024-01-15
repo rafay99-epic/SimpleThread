@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^6.1.0
   firebase_auth: ^4.16.0
   hidden_drawer_menu: ^3.0.1
+  cloud_firestore: ^4.14.0
 
 dev_dependencies:
   flutter_test:

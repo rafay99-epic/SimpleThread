@@ -50,97 +50,6 @@ class MyDrawer extends StatelessWidget {
                 height: 25,
               ),
 
-//Version -02:
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 25.0),
-              //   child: ListTile(
-              //     title: Text(
-              //       "H O M E",
-              //       style: GoogleFonts.playfairDisplay(
-              //         color: Colors.black,
-              //         // fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //     leading: const Icon(Icons.home_rounded),
-              //     onTap: () {
-              //       // Check if the current page is the HomePage
-              //       if (ModalRoute.of(context)?.settings.name ==
-              //           HomePage.homerouter) {
-              //         // If it is, just close the drawer
-              //         Navigator.pop(context);
-              //       } else {
-              //         // If it's not, close the drawer and navigate to the Home Page
-              //         // Navigator.pop(context);
-              //         // Navigator.pushReplacement(
-              //         //   context,
-              //         //   MaterialPageRoute(
-              //         //     builder: (context) => const HomePage(),
-              //         //   ),
-              //         // );
-              //       }
-              //     },
-              //   ),
-              // ),
-
-              //version-03
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 25.0),
-              //   child: ListTile(
-              //     title: Text(
-              //       "H O M E",
-              //       style: GoogleFonts.playfairDisplay(
-              //         color: Colors.black,
-              //         // fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //     leading: const Icon(Icons.home_rounded),
-              //     onTap: () {
-              //       // Check if the current page is an instance of HomePage
-              //       if (ModalRoute.of(context)?.settings.arguments
-              //           is HomePage) {
-              //         // If it is, just close the drawer
-              //         Navigator.pop(context);
-              //       } else {
-              //         // If it's not, close the drawer and navigate to the Home Page
-              //         Navigator.pop(context);
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) => const HomePage(),
-              //           ),
-              //         );
-              //       }
-              //     },
-              //   ),
-              // ),
-
-//Version-01
-
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 25.0),
-              //   child: ListTile(
-              //     title: Text(
-              //       "H O M E",
-              //       style: GoogleFonts.playfairDisplay(
-              //         color: Colors.black,
-              //         // fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //     leading: const Icon(Icons.home_rounded),
-              //     onTap: () {
-              //       // Check if the current page is not the Home Page
-              //       if (ModalRoute.of(context)?.settings.name !=
-              //           HomePage.routeName) {
-              //         // If not, close the drawer and navigate back to the Home Page
-              //         Navigator.popUntil(context, (route) => route.isFirst);
-              //       } else {
-              //         // If the Home Page is already open, just close the drawer
-              //         Navigator.pop(context);
-              //       }
-              //     },
-              //   ),
-              // ),
-
               // Home Page Item Orginal Code with Reopening the Home Page
               Padding(
                 padding: const EdgeInsets.only(left: 25.0),
@@ -161,7 +70,7 @@ class MyDrawer extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomePage(),
+                        builder: (context) => HomePage(),
                       ),
                     ),
                   },

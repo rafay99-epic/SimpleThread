@@ -5,7 +5,6 @@ import '../compoents/my_appbar.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
-  static const String routeName = '/mySettings';
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
