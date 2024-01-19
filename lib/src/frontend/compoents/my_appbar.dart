@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   //parameters for the app bar
