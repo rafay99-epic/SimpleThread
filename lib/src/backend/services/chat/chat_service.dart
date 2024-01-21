@@ -57,5 +57,20 @@ class ChatService {
         .collection("messages")
         .add(newMessage.toMap());
   }
+
   //get message from users
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMessage(
+      String userID, otherUserID) {
+    // constructer a chat room between tow users.
+    List<String> ids = [userID, otherUserID];
+    ids.sort(); //sort them to chatroom ID and making sure they are in the same room
+    String chatRoomID = ids.join('_');
+
+    return _firestore
+        .collection("chat_rooms")
+        .doc(chatRoomID)
+        .collection("messages")
+        .orderBy("timesstamp", descending: false)
+        .snapshots();
+  }
 }

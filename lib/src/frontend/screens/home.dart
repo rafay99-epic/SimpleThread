@@ -7,7 +7,6 @@ import '../compoents/My_drawer.dart';
 import '../compoents/my_appbar.dart';
 import '../compoents/user_title.dart';
 import 'chat_page.dart';
-// import 'package:simplethread/src/compoents/My_drawer.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -101,6 +100,7 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => ChatPage(
                 receiverEmail: userData["email"],
+                receiverID: userData["uid"],
               ),
             ),
           );
