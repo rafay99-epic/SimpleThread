@@ -29,6 +29,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
+      iconTheme: const IconThemeData(color: Colors.black),
     );
   }
 }
