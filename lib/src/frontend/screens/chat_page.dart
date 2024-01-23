@@ -15,7 +15,7 @@ class ChatPage extends StatefulWidget {
   final String receiverID;
 
   //*loader for chat
-  static const String _loader = "animation/loader.json";
+  static const String _loader = "assets/animation/loader.json";
   //*For Empty Chat Screen
   static const String _emptyChat = "assets/images/empty_chat.svg";
 

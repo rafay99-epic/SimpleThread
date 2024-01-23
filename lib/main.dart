@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:simplethread/firebase_options.dart';
+import 'package:simplethread/src/frontend/screens/check_internet_page.dart';
 import 'package:simplethread/src/frontend/screens/splash_screen.dart';
 import 'package:simplethread/src/frontend/theme/light_mode.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashScreen(),
+      home: const CheckInternetPage(),
       debugShowCheckedModeBanner: false,
       theme: lightMode,
     );
