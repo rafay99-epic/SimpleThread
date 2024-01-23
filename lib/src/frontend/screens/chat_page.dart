@@ -1,14 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
 import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
 import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ChatPage extends StatelessWidget {
   //Getting Data Variables
   final String receiverEmail;
   final String receiverID;
+
+  //*loader for chat
+  static const String _loader = "/animation/loader.json";
+  //*For Empty Chat Screen
+  static const String _emptyChat = "assets/images/empty_chat.svg";
+
   // getting  functions
   ChatPage({
     super.key,
@@ -66,14 +75,45 @@ class ChatPage extends StatelessWidget {
 
         //* loading
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text("Loading error on chat Application...");
+          return Center(
+            child: Lottie.asset(
+              _loader,
+              width: 150,
+              height: 150,
+              repeat: true,
+              reverse: false,
+            ),
+          );
         }
 
         //* return list view
-        return ListView(
-          children:
-              snapshot.data!.docs.map((doc) => _buildMessageItem(doc)).toList(),
-        );
+        return snapshot.hasData && snapshot.data!.docs.isNotEmpty
+            ? ListView(
+                children: snapshot.data!.docs
+                    .map((doc) => _buildMessageItem(doc))
+                    .toList(),
+              )
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      _emptyChat,
+                      width: 300,
+                      height: 300,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      "Begin Chat by saying Hi!",
+                      style: GoogleFonts.playfairDisplay(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 22,
+                      ),
+                    ),
+                  ],
+                ),
+              );
       },
     );
   }
@@ -81,7 +121,25 @@ class ChatPage extends StatelessWidget {
   //* Displaying Messsage in the UI
   Widget _buildMessageItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    return Text(data["message"]);
+    String message = data["message"];
+    String senderID = data["senderID"];
+    bool isSender = senderID == _authService.getcurrentUser()!.uid;
+
+    return Align(
+      alignment: isSender ? Alignment.centerLeft : Alignment.centerRight,
+      child: Container(
+        margin: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: isSender ? const Color.fromRGBO(54, 54, 54, 1) : Colors.green,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Text(
+          message,
+          style: const TextStyle(color: Colors.white),
+        ),
+      ),
+    );
   }
 
   //* Sent Message Input

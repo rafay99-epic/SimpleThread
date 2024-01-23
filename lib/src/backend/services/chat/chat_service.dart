@@ -10,7 +10,10 @@ class ChatService {
 
 /*
 ! I've worked on this code for ten hours. Please don't alter the structure. If you do decide to alter the code, you should add the necessary time to this counter. 
-! Counter: 10h
+! Counter: 0h
+
+! Code Fixed By @Smalick0478
+! Reduce Hour Counter if you have fixed the code 😊
 
 * Stream<List<Map<String, dynamic>>>
 
@@ -70,7 +73,7 @@ class ChatService {
         .collection("chat_rooms")
         .doc(chatRoomID)
         .collection("messages")
-        .orderBy("timesstamp", descending: false)
+        .orderBy("timestamp", descending: false)
         .snapshots();
   }
 }
