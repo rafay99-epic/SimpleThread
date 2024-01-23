@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:simplethread/src/backend/services/auth/auth_service.dart';
-import 'package:simplethread/src/backend/services/chat/chat_service.dart';
-import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
-import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '/src/backend/services/auth/auth_service.dart';
+import '/src/backend/services/chat/chat_service.dart';
+import '/src/frontend/compoents/my_appbar.dart';
+import '/src/frontend/compoents/my_textfeild.dart';
 
 class ChatPage extends StatelessWidget {
   //Getting Data Variables
@@ -14,7 +15,7 @@ class ChatPage extends StatelessWidget {
   final String receiverID;
 
   //*loader for chat
-  static const String _loader = "/animation/loader.json";
+  static const String _loader = "animation/loader.json";
   //*For Empty Chat Screen
   static const String _emptyChat = "assets/images/empty_chat.svg";
 
