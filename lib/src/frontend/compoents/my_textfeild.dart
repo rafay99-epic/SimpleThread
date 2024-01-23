@@ -5,12 +5,14 @@ class MyTextFeild extends StatelessWidget {
   final bool obsuretext;
   final TextEditingController controller;
   final IconData icons;
+  final FocusNode? focusNode;
   const MyTextFeild({
     super.key,
     required this.hintText,
     required this.obsuretext,
     required this.controller,
     required this.icons,
+    this.focusNode,
   });
 
   @override
@@ -20,6 +22,7 @@ class MyTextFeild extends StatelessWidget {
       child: TextField(
         obscureText: obsuretext,
         controller: controller,
+        focusNode: focusNode,
         decoration: InputDecoration(
             //this is the enable the Text Feild color and design
             enabledBorder: OutlineInputBorder(
