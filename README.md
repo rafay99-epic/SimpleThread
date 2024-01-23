@@ -1,16 +1,57 @@
-# simplethread
+# Simple Thread - Flutter x Firebase Chat Application
 
-A new Flutter project.
+Welcome to **Simple Thread**, a clean and user-friendly chat application built with Flutter and Firebase. Below, you'll find details about completed features, front-end and back-end changes, as well as the remaining tasks in the TODO list.
+
+# Features: 
+### Front UI Changes
+- 📝 Splash Screen
+- 📝 Login Pages
+- 📝 Register User Page
+- 📝 Home Screen Page
+- 📝 Drawer Menu
+- 📝 Light Color Mode
+- 📝 Dark Color Mode
+- 📝 AppBar Module
+- 📝 Setting page
+- 📝 About Us Page
+
+### Back End Changes
+- 📝 Packages added
+- 📝 Firebase connection
+- 📝 Login Authentication
+- 📝 Register User
+- 📝 Chatting System
+- 📝 Error handling
+
+## TODO
+- 📋 Check Internet connection
+- 📋 Seen Message
+- 📋 Register user based on Name
+- 📋 Display Names in the Chat Room
+
+## Run Application
+1. Fork the Project
+2. Run `flutter pub get`
+3. Execute `flutter run` command in the terminal.
+
+Feel free to contribute, report issues, or suggest improvements. Happy coding!
+
+![App Screenshots](/screenshots/screenshot1.png)
+![App Screenshots](/screenshots/screenshot2.png)
 
 ## Getting Started
+1. Clone the repository: `git clone https://github.com/your-username/simple-thread.git`
+2. Navigate to the project directory: `cd simple-thread`
+3. Run `flutter pub get` to install dependencies.
+4. Execute `flutter run` to launch the application.
 
-This project is a starting point for a Flutter application.
+## Support
+For any questions, issues, or feedback, please [open an issue](https://github.com/your-username/simple-thread/issues).
 
-A few resources to get you started if this is your first Flutter project:
+## Author
+- [Abdul Rafay](https://github.com/rafay99-epic)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Thank You [Smalick0478](https://github.com/Smalick0478) for your contribution. 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
