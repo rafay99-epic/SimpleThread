@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:simplethread/firebase_options.dart';
 import 'package:simplethread/src/frontend/screens/check_internet_page.dart';
-import 'package:simplethread/src/frontend/screens/splash_screen.dart';
 import 'package:simplethread/src/frontend/theme/light_mode.dart';
+import 'package:provider/provider.dart';
+import 'src/frontend/theme/dark_mode.dart';
+import 'src/frontend/theme/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +14,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +31,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const CheckInternetPage(),
       debugShowCheckedModeBanner: false,
-      theme: lightMode,
+      theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
 }

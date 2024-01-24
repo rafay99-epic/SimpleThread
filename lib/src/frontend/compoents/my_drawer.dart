@@ -38,11 +38,11 @@ class MyDrawer extends StatelessWidget {
               Text(
                 'Simple Thread',
                 style: GoogleFonts.playfairDisplay(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                     letterSpacing: .5,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
               ),
@@ -57,7 +57,7 @@ class MyDrawer extends StatelessWidget {
                   title: Text(
                     "H O M E",
                     style: GoogleFonts.playfairDisplay(
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                       // fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -84,7 +84,7 @@ class MyDrawer extends StatelessWidget {
                   title: Text(
                     "S E T T I N G S",
                     style: GoogleFonts.playfairDisplay(
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                       // fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -111,7 +111,7 @@ class MyDrawer extends StatelessWidget {
               title: Text(
                 "L O G O U T",
                 style: GoogleFonts.playfairDisplay(
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.inversePrimary,
                   // fontWeight: FontWeight.bold,
                 ),
               ),
