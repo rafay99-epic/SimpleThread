@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simplethread/src/frontend/theme/dark_mode.dart';
 import 'package:simplethread/src/frontend/theme/light_mode.dart';

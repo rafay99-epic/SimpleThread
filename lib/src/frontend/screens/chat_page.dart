@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '/src/backend/services/auth/auth_service.dart';
-import '/src/backend/services/chat/chat_service.dart';
-import '/src/frontend/compoents/my_appbar.dart';
-import '/src/frontend/compoents/my_textfeild.dart';
+import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+import 'package:simplethread/src/backend/services/chat/chat_service.dart';
+import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
+import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
 
 class ChatPage extends StatefulWidget {
   //Getting Data Variables
@@ -95,7 +95,9 @@ class _ChatPageState extends State<ChatPage> {
     if (_messageController.text.isNotEmpty) {
       //send the message
       await _chatService.sendMessage(
-          widget.receiverID, _messageController.text);
+        widget.receiverID,
+        _messageController.text,
+      );
       _messageController.clear();
     }
     scrollDown();

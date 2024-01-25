@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../backend/services/auth/auth_service.dart';
-import '../screens/home.dart';
-import '../screens/setting_page.dart';
+import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+import 'package:simplethread/src/frontend/screens/home.dart';
+import 'package:simplethread/src/frontend/screens/setting_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -97,7 +97,7 @@ class MyDrawer extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SettingPage(),
+                        builder: (context) => const SettingPage(),
                       ),
                     ),
                   },

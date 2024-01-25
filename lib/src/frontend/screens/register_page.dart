@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 
-import '../compoents/my_button.dart';
-import '../compoents/my_textfeild.dart';
+import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+import 'package:simplethread/src/frontend/compoents/my_button.dart';
+import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
 
 class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();

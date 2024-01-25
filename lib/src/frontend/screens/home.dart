@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../backend/services/auth/auth_service.dart';
-import '../../backend/services/chat/chat_service.dart';
-import '../compoents/my_drawer.dart';
-import '../compoents/my_appbar.dart';
-import '../compoents/user_title.dart';
-import 'chat_page.dart';
+import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+import 'package:simplethread/src/backend/services/chat/chat_service.dart';
+import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
+import 'package:simplethread/src/frontend/compoents/my_drawer.dart';
+import 'package:simplethread/src/frontend/compoents/user_title.dart';
+import 'package:simplethread/src/frontend/screens/chat_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});

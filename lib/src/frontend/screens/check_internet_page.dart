@@ -1,15 +1,15 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'splash_screen.dart'; // Import your SplashScreen
+
+import 'package:simplethread/src/frontend/screens/splash_screen.dart';
 
 class CheckInternetPage extends StatefulWidget {
   const CheckInternetPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CheckInternetPageState createState() => _CheckInternetPageState();
 }
 

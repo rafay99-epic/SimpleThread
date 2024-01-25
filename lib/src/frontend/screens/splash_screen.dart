@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
+
 import 'package:simplethread/src/backend/services/auth/auth_gate.dart';
 
 class SplashScreen extends StatefulWidget {

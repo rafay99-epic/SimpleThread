@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
 
 class ContactPage extends StatelessWidget {
   ContactPage({super.key});
