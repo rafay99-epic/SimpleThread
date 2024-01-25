@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactPage extends StatelessWidget {
-  const ContactPage({super.key});
+  ContactPage({super.key});
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final messageController = TextEditingController();
 
   Widget buildTextField(String labelText,
       {int maxLines = 1,
       required String hintText,
-      required IconData prefixIcon}) {
+      required IconData prefixIcon,
+      required TextEditingController controller}) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
@@ -55,20 +61,46 @@ class ContactPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 35),
-              buildTextField('Name',
-                  hintText: 'Enter your name', prefixIcon: Icons.person),
+              buildTextField(
+                'Name',
+                controller: nameController,
+                hintText: 'Enter your name',
+                prefixIcon: Icons.person,
+              ),
               const SizedBox(height: 35),
-              buildTextField('Email',
-                  hintText: 'Enter your email', prefixIcon: Icons.email),
+              buildTextField(
+                'Email',
+                hintText: 'Enter your email',
+                prefixIcon: Icons.email,
+                controller: emailController,
+              ),
               const SizedBox(height: 35),
-              buildTextField('Message',
-                  maxLines: 5,
-                  hintText: 'Enter your message',
-                  prefixIcon: Icons.message),
+              buildTextField(
+                'Message',
+                controller: messageController,
+                maxLines: 5,
+                hintText: 'Enter your message',
+                prefixIcon: Icons.message,
+              ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Add your form submission logic here
+                  final name = nameController.text;
+                  final email = emailController.text;
+                  final message = messageController.text;
+
+                  // Create the mailto link
+                  final mailtoLink = Uri(
+                    scheme: 'mailto',
+                    path: '99marafay@gmail.com',
+                    queryParameters: {
+                      'subject': 'Contact form from $name',
+                      'body': 'Name: $name\nEmail: $email\nMessage: $message',
+                    },
+                  ).toString();
+
+                  // Open the link
+                  launch(mailtoLink);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
