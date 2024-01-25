@@ -17,12 +17,15 @@ class MyTextFeild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
         obscureText: obsuretext,
         controller: controller,
         focusNode: focusNode,
+        style: TextStyle(fontSize: screenHeight * 0.02), // 2% of screen height
         decoration: InputDecoration(
             //this is the enable the Text Feild color and design
             enabledBorder: OutlineInputBorder(
