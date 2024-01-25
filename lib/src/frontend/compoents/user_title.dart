@@ -23,8 +23,9 @@ class UserTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         margin: EdgeInsets.symmetric(
-            vertical: screenWidth * 0.03,
-            horizontal: screenWidth * 0.04), // 3% vertical, 4% horizontal
+          vertical: screenWidth * 0.03,
+          horizontal: screenWidth * 0.04,
+        ), // 3% vertical, 4% horizontal
         padding: EdgeInsets.all(screenWidth * 0.05), // 5% of screen width
         child: Row(
           children: [
