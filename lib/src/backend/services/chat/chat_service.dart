@@ -47,6 +47,7 @@ class ChatService {
       reciverID: reciverID,
       message: message,
       timestamp: timestamp,
+      // read: false,
     );
 
     //contruct chat room ID for two users

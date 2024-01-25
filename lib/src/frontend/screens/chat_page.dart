@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:simplethread/src/backend/model/message.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
 import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
 import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class ChatPage extends StatefulWidget {
   //Getting Data Variables
@@ -161,6 +163,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   //* Displaying Messsage in the UI
+//  Orginal Code : Version 01: without seen Message
   Widget _buildMessageItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     String message = data["message"];
@@ -183,6 +186,76 @@ class _ChatPageState extends State<ChatPage> {
       ),
     );
   }
+
+  /* 
+   ! Noting Changing the Value into the datastore:
+   ! 1. Firebase is open. Need Acess Text Me. 
+   ! 2. The orginal Code is V1, Don't delete it.Just comment it Plz. 
+   ! 3. There are some values that I have commented out, in file chat_service.dart,
+   !    message.dart.
+   ! 4. Everything is the same. 
+   *                        Good Luck 
+  */
+
+  // Version 04: Chaging the value into the database
+
+  // Widget _buildMessageItem(DocumentSnapshot doc) {
+  //   Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+  //   String message = data["message"];
+  //   String senderID = data["senderID"];
+  //   bool isRead = data["read"] ?? false;
+  //   bool isSender = senderID == _authService.getcurrentUser()!.uid;
+
+  //   return VisibilityDetector(
+  //     key: Key(doc.id),
+  //     onVisibilityChanged: (visibilityInfo) {
+  //       var visiblePercentage = visibilityInfo.visibleFraction * 100;
+  //       if (visiblePercentage == 100 && !isRead && isSender) {
+  //         // Update the 'read' field in Firestore
+  //         FirebaseFirestore.instance
+  //             .collection("chat_rooms")
+  //             .doc(
+  //               ChatService.ch,
+  //             ) // Assuming ChatService has a static property chatRoomId
+  //             .collection("messages")
+  //             .doc(doc.id)
+  //             .update({'read': true});
+  //       }
+  //     },
+  //     child: Column(
+  //       crossAxisAlignment:
+  //           isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+  //       children: [
+  //         Align(
+  //           alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+  //           child: Container(
+  //             margin: const EdgeInsets.all(8.0),
+  //             padding: const EdgeInsets.all(12.0),
+  //             decoration: BoxDecoration(
+  //               color: isSender ? Colors.blueAccent : Colors.green,
+  //               borderRadius: BorderRadius.circular(8.0),
+  //             ),
+  //             child: Text(
+  //               message,
+  //               style: const TextStyle(color: Colors.white),
+  //             ),
+  //           ),
+  //         ),
+  //         if (isSender)
+  //           Container(
+  //             margin: const EdgeInsets.only(right: 8.0),
+  //             child: Icon(
+  //               Icons.check_rounded,
+  //               color: isRead
+  //                   ? Theme.of(context).colorScheme.secondary
+  //                   : Theme.of(context).colorScheme.primary,
+  //               size: 12.0,
+  //             ),
+  //           ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   //* Sent Message Input
   Widget _buildMessageInput() {
