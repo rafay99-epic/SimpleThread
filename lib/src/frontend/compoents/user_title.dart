@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserTile extends StatelessWidget {
   const UserTile({
@@ -23,16 +24,20 @@ class UserTile extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Row(
           children: [
-            const SizedBox(
-              width: 35,
-            ),
             //icon
             const Icon(Icons.person_rounded),
+            // adding Space
             const SizedBox(
               width: 20,
             ),
             //username
-            Text(text),
+            Text(
+              text,
+              style: GoogleFonts.playfairDisplay(
+                letterSpacing: .5,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),
