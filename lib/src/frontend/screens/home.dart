@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
         title: 'Home',
         // icon: Icons.home_rounded,
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(),
       body: _buildUserList(),
     );
   }

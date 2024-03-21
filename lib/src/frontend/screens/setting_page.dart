@@ -15,7 +15,7 @@ class SettingPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: const MyAppBar(title: "Settings"),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(),
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: ListView(

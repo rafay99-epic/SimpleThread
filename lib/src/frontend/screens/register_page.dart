@@ -9,6 +9,8 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
   final TextEditingController _confirmPwController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   // final String _animation = "assets/animation/register.json";
   // final String _imageLogo = 'assets/images/register.png';
   RegisterPage({super.key, this.onTap});
@@ -21,6 +23,8 @@ class RegisterPage extends StatelessWidget {
         _auth.signUpWithEmailPassword(
           _emailController.text,
           _pwController.text,
+          _nameController.text,
+          _phoneNumberController.text,
         );
       } catch (e) {
         showDialog(
@@ -96,6 +100,25 @@ class RegisterPage extends StatelessWidget {
               obsuretext: false,
               controller: _emailController,
               icons: Icons.email_rounded,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            MyTextFeild(
+              hintText: "Name",
+              obsuretext: false,
+              controller: _nameController,
+              icons: Icons.person_rounded,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            MyTextFeild(
+              hintText: "Phone Number",
+              obsuretext: false,
+              controller: _phoneNumberController,
+              icons: Icons.phone_rounded,
+              isNumeric: true,
             ),
             const SizedBox(
               height: 10,

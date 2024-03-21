@@ -32,7 +32,11 @@ class AuthService {
 
   //regisrter user
   Future<UserCredential> signUpWithEmailPassword(
-      String email, String password) async {
+    String email,
+    String password,
+    String name,
+    String phoneNumber,
+  ) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -43,6 +47,8 @@ class AuthService {
       _firestore.collection("Users").doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'email': email,
+        'name': name,
+        'phoneNumber': phoneNumber,
       });
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -55,5 +61,13 @@ class AuthService {
     return await _auth.signOut();
   }
 
-  //error handelling
+  //forget password
+  // Send password reset email
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.code);
+    }
+  }
 }
