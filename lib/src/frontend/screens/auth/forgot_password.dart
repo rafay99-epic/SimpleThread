@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/frontend/widget/my_button.dart';
 import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
+import 'package:simplethread/src/frontend/widget/snakbar.dart';
 
 // ignore: camel_case_types
 class ForgotPassword extends StatelessWidget {
@@ -45,20 +46,24 @@ class ForgotPassword extends StatelessWidget {
           ),
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            showCloseIcon: true,
-            closeIconColor: Colors.red,
-            content: Text(
-              'Please enter your email',
-              style: GoogleFonts.roboto(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          ),
+        const CustomSnackBar(
+          contentText: 'Please enter your email',
         );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //     behavior: SnackBarBehavior.floating,
+        //     backgroundColor: Theme.of(context).colorScheme.secondary,
+        //     showCloseIcon: true,
+        //     duration: const Duration(seconds: 2),
+        //     closeIconColor: Colors.red,
+        //     content: Text(
+        //       'Please enter your email',
+        //       style: GoogleFonts.roboto(
+        //         color: Theme.of(context).colorScheme.primary,
+        //       ),
+        //     ),
+        //   ),
+        // );
       }
     } catch (e) {
       // ignore: use_build_context_synchronously

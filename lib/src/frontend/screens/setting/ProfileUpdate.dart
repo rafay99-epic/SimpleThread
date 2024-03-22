@@ -1,8 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'package:simplethread/src/backend/services/profile/profile.dart';
 import 'package:simplethread/src/frontend/widget/customtextfeild2.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
+import 'package:simplethread/src/frontend/widget/snakbar.dart';
 
 class ProfileUpdate extends StatefulWidget {
   const ProfileUpdate({Key? key}) : super(key: key);
@@ -15,12 +19,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
   final nameController = TextEditingController();
+  ProfileService profileService = ProfileService();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // TODO: Load user data from Firestore and set the controllers' values
-  // }
   @override
   void initState() {
     super.initState();
@@ -28,18 +28,15 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   }
 
   Future<void> loadUserData() async {
-    final userId = FirebaseAuth.instance.currentUser?.uid;
+    final user = await profileService.getCurrentUser();
 
-    if (userId == null) {
+    if (user == null) {
       // Handle the case where the user is not logged in
       return;
     }
 
     try {
-      final docSnapshot = await FirebaseFirestore.instance
-          .collection('Users')
-          .doc(userId)
-          .get();
+      final docSnapshot = await profileService.getUserData(user.uid);
 
       if (docSnapshot.exists) {
         final data = docSnapshot.data() as Map<String, dynamic>;
@@ -56,7 +53,39 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   }
 
   void updateProfile() async {
-    // TODO: Update user data in Firestore with the controllers' values
+    final user = await profileService.getCurrentUser();
+
+    if (user == null) {
+      const CustomSnackBar(
+        contentText: 'Please create an account ',
+      );
+      return;
+    }
+
+    try {
+      await profileService.updateUserData(
+        user.uid,
+        emailController.text,
+        nameController.text,
+        phoneNumberController.text,
+      );
+      const CustomSnackBar(
+        contentText: 'Profile Updated Successfully',
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            e.toString(),
+            style: GoogleFonts.playfairDisplay(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -73,14 +102,14 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
               prefixIcon: Icons.person,
               controller: nameController,
             ),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 15.0),
             CustomTextField(
               labelText: 'Email',
               hintText: 'Enter your email',
               prefixIcon: Icons.email,
               controller: emailController,
             ),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 15.0),
             CustomTextField(
               labelText: 'Phone Number',
               hintText: 'Enter your phone number',
@@ -115,7 +144,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                   padding: EdgeInsets.symmetric(
                       horizontal: MediaQuery.of(context).size.width * 0.1),
                   child: ElevatedButton(
-                    onPressed: () => {},
+                    onPressed: () => {Navigator.of(context).pop()},
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).colorScheme.inversePrimary,
