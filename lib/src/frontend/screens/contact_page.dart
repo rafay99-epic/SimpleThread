@@ -1,16 +1,71 @@
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:url_launcher/url_launcher.dart';
+// ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:simplethread/src/backend/services/contactMessage/contactMessage.dart';
 import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
 
 class ContactPage extends StatelessWidget {
   ContactPage({super.key});
 
+  //controllers
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final messageController = TextEditingController();
 
+  void sendMessage(BuildContext context) async {
+    try {
+      ContactService contactService = ContactService();
+
+      await contactService.saveContactMessage(
+        emailController.text,
+        nameController.text,
+        messageController.text,
+        context,
+      );
+
+      messageController.clear();
+      nameController.clear();
+      emailController.clear();
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            "Failed to send message: $e",
+            style: GoogleFonts.playfairDisplay(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          content: Text(
+            e.toString(),
+            style: GoogleFonts.playfairDisplay(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'OK',
+                style: GoogleFonts.playfairDisplay(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  // custom Text Feild
   Widget buildTextField(String labelText,
       {int maxLines = 1,
       required String hintText,
@@ -20,6 +75,7 @@ class ContactPage extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
         maxLines: maxLines,
+        controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
           hintText: hintText,
@@ -32,6 +88,7 @@ class ContactPage extends StatelessWidget {
     );
   }
 
+  //build Main Function
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,24 +142,7 @@ class ContactPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  final name = nameController.text;
-                  final email = emailController.text;
-                  final message = messageController.text;
-
-                  // Create the mailto link
-                  final mailtoLink = Uri(
-                    scheme: 'mailto',
-                    path: '99marafay@gmail.com',
-                    queryParameters: {
-                      'subject': 'Contact form from $name',
-                      'body': 'Name: $name\nEmail: $email\nMessage: $message',
-                    },
-                  ).toString();
-
-                  // Open the link
-                  launch(mailtoLink);
-                },
+                onPressed: () => sendMessage(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
                   padding:

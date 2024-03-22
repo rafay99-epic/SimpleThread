@@ -1,9 +1,8 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
 import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
@@ -109,23 +108,7 @@ class HomePage extends StatelessWidget {
         },
       );
     } else {
-      return Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Lottie.asset('assets/animation/nousers.json'),
-              Text(
-                'No User yet',
-                style: GoogleFonts.playfairDisplay(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+      return Container();
     }
   }
 }

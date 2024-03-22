@@ -21,20 +21,12 @@ class AuthService {
   Future<void> signInWithEmailPassword(
       String email, String password, BuildContext context) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
 
-      //saving the current User information into a serperate doc if it doesn't exist
-      _firestore.collection("Users").doc(userCredential.user!.uid).set({
-        'uid': userCredential.user!.uid,
-        'email': email,
-      });
-
-      // Navigate to the next page after successful login
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(), // replace with your next page
+          builder: (context) => HomePage(),
         ),
       );
     } on FirebaseAuthException catch (e) {
@@ -74,23 +66,6 @@ class AuthService {
       );
     }
   }
-  // Future<UserCredential> signInWithEmailPassword(
-  //     String email, String password, context) async {
-  //   try {
-  //     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-  //         email: email, password: password);
-
-  //     //saving the current User information into a serperate doc if it doesn't exist
-  //     _firestore.collection("Users").doc(userCredential.user!.uid).set({
-  //       'uid': userCredential.user!.uid,
-  //       'email': email,
-  //     });
-
-  //     return userCredential;
-  //   } on FirebaseAuthException catch (e) {
-  //     throw Exception(e.code);
-  //   }
-  // }
 
   //regisrter user
   Future<UserCredential> signUpWithEmailPassword(
@@ -124,7 +99,6 @@ class AuthService {
   }
 
   //forget password
-  // Send password reset email
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
