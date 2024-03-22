@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
@@ -92,14 +95,13 @@ class HomePage extends StatelessWidget {
 
     if (userData["email"] != _authService.getcurrentUser()!.email) {
       return UserTile(
-        text: userData['email'],
+        text: userData['name'],
         onTap: () {
-          //tap on a user -> go to chat Page
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ChatPage(
-                receiverEmail: userData["email"],
+                receiverEmail: userData["name"],
                 receiverID: userData["uid"],
               ),
             ),
@@ -107,7 +109,23 @@ class HomePage extends StatelessWidget {
         },
       );
     } else {
-      return Container();
+      return Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset('assets/animation/nousers.json'),
+              Text(
+                'No User yet',
+                style: GoogleFonts.playfairDisplay(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
     }
   }
 }
