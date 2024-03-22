@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
-import 'package:simplethread/src/frontend/screens/home.dart';
-import 'package:simplethread/src/frontend/screens/login_page.dart';
-import 'package:simplethread/src/frontend/screens/setting_page.dart';
+import 'package:simplethread/src/frontend/screens/chat/home.dart';
+import 'package:simplethread/src/frontend/screens/auth/login_page.dart';
+import 'package:simplethread/src/frontend/screens/setting/setting_page.dart';
 
 class MyDrawer extends StatelessWidget {
   MyDrawer({super.key});

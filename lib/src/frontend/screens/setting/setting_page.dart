@@ -5,7 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:simplethread/src/frontend/compoents/darkmodeswitch.dart';
 import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
 import 'package:simplethread/src/frontend/compoents/my_drawer.dart';
-import 'package:simplethread/src/frontend/screens/contact_page.dart';
+import 'package:simplethread/src/frontend/screens/setting/contact_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -32,12 +32,41 @@ class SettingPage extends StatelessWidget {
                 children: <Widget>[
                   const Icon(
                     Icons.contact_mail,
-                  ), // Add an icon next to the title
+                  ),
                   const SizedBox(
                     width: 8.0,
                   ), // Add some spacing between the icon and the title
                   Text(
                     'Contact US',
+                    style: GoogleFonts.playfairDisplay(
+                      textStyle: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    type: PageTransitionType
+                        .rightToLeftWithFade, // Fade transition from right to left
+                    child: ContactPage(),
+                    duration: const Duration(milliseconds: 200),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: <Widget>[
+                  const Icon(
+                    Icons.person_3_sharp,
+                  ),
+                  const SizedBox(
+                    width: 8.0,
+                  ), // Add some spacing between the icon and the title
+                  Text(
+                    'Profile',
                     style: GoogleFonts.playfairDisplay(
                       textStyle: Theme.of(context).textTheme.titleLarge,
                     ),

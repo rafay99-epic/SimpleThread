@@ -8,7 +8,7 @@ import 'package:simplethread/src/backend/services/chat/chat_service.dart';
 import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
 import 'package:simplethread/src/frontend/compoents/my_drawer.dart';
 import 'package:simplethread/src/frontend/compoents/user_title.dart';
-import 'package:simplethread/src/frontend/screens/chat_page.dart';
+import 'package:simplethread/src/frontend/screens/chat/chat_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -90,8 +90,6 @@ class HomePage extends StatelessWidget {
   //build indivial list title for user
   Widget _builderUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
-    //display all user expect current user
-
     if (userData["email"] != _authService.getcurrentUser()!.email) {
       return UserTile(
         text: userData['name'],

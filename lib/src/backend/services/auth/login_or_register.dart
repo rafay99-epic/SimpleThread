@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:simplethread/src/frontend/screens/login_page.dart';
-import 'package:simplethread/src/frontend/screens/register_page.dart';
-import 'package:simplethread/src/frontend/screens/forgot_password.dart'; // import the ForgotPassword page
+import 'package:simplethread/src/frontend/screens/auth/login_page.dart';
+import 'package:simplethread/src/frontend/screens/auth/register_page.dart';
+import 'package:simplethread/src/frontend/screens/auth/forgot_password.dart'; // import the ForgotPassword page
 
 //version03:
 class LoginOrRegister extends StatefulWidget {
