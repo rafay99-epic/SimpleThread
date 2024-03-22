@@ -1,14 +1,22 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/backend/services/delete/delete.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
 
+//------------------------------------
+//  Delete User Auth and Data Screen
+//------------------------------------
 class DeleteProfile extends StatelessWidget {
   DeleteProfile({super.key});
 
   final delete_data = DeleteDataProfile();
 
+  //----------------------------------
+  //  Main Build Widget
+  //----------------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,6 +90,9 @@ class DeleteProfile extends StatelessWidget {
                   ],
                 ),
               const SizedBox(height: 35),
+              //----------------------------------
+              //  Elevated Button
+              //----------------------------------
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -92,6 +103,9 @@ class DeleteProfile extends StatelessWidget {
                       borderRadius: BorderRadius.zero),
                 ),
                 onPressed: () {
+                  //----------------------------------
+                  //  Delete Dialog Box
+                  //----------------------------------
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
