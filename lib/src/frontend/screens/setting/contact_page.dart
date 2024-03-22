@@ -66,29 +66,6 @@ class ContactPage extends StatelessWidget {
     }
   }
 
-  // custom Text Feild
-  // Widget buildTextField(String labelText,
-  //     {int maxLines = 1,
-  //     required String hintText,
-  //     required IconData prefixIcon,
-  //     required TextEditingController controller}) {
-  //   return Container(
-  //     margin: const EdgeInsets.symmetric(horizontal: 20.0),
-  //     child: TextFormField(
-  //       maxLines: maxLines,
-  //       controller: controller,
-  //       decoration: InputDecoration(
-  //         labelText: labelText,
-  //         hintText: hintText,
-  //         prefixIcon: Icon(prefixIcon),
-  //         border: OutlineInputBorder(
-  //           borderRadius: BorderRadius.circular(10.0),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
   //build Main Function
   @override
   Widget build(BuildContext context) {

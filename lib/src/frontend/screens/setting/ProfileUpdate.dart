@@ -17,12 +17,18 @@ class ProfileUpdate extends StatefulWidget {
 }
 
 class _ProfileUpdateState extends State<ProfileUpdate> {
+  //----------------------------------
+  //  Controllers & Services
+  //----------------------------------
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
   final nameController = TextEditingController();
   final passwordController = TextEditingController();
   ProfileService profileService = ProfileService();
 
+  //----------------------------------
+  //  init Function
+  //----------------------------------
   @override
   void initState() {
     super.initState();
@@ -252,6 +258,9 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
     );
   }
 
+  //----------------------------------
+  //  Build Function
+  //----------------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
