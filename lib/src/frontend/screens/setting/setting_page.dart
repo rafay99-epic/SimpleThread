@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
-import 'package:simplethread/src/frontend/compoents/darkmodeswitch.dart';
-import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
-import 'package:simplethread/src/frontend/compoents/my_drawer.dart';
+import 'package:simplethread/src/frontend/widget/darkmodeswitch.dart';
+import 'package:simplethread/src/frontend/widget/my_appbar.dart';
+import 'package:simplethread/src/frontend/widget/my_drawer.dart';
+import 'package:simplethread/src/frontend/screens/setting/ProfileUpdate.dart';
 import 'package:simplethread/src/frontend/screens/setting/contact_page.dart';
 
 class SettingPage extends StatelessWidget {
@@ -48,8 +49,7 @@ class SettingPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   PageTransition(
-                    type: PageTransitionType
-                        .rightToLeftWithFade, // Fade transition from right to left
+                    type: PageTransitionType.rightToLeftWithFade,
                     child: ContactPage(),
                     duration: const Duration(milliseconds: 200),
                   ),
@@ -79,7 +79,7 @@ class SettingPage extends StatelessWidget {
                   PageTransition(
                     type: PageTransitionType
                         .rightToLeftWithFade, // Fade transition from right to left
-                    child: ContactPage(),
+                    child: const ProfileUpdate(),
                     duration: const Duration(milliseconds: 200),
                   ),
                 );

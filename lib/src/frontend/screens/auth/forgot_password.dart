@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
-import 'package:simplethread/src/frontend/compoents/my_button.dart';
-import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
+import 'package:simplethread/src/frontend/widget/my_button.dart';
+import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
 
 // ignore: camel_case_types
 class ForgotPassword extends StatelessWidget {

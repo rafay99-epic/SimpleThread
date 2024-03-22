@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
-import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
-import 'package:simplethread/src/frontend/compoents/my_drawer.dart';
-import 'package:simplethread/src/frontend/compoents/user_title.dart';
+import 'package:simplethread/src/frontend/widget/my_appbar.dart';
+import 'package:simplethread/src/frontend/widget/my_drawer.dart';
+import 'package:simplethread/src/frontend/widget/user_title.dart';
 import 'package:simplethread/src/frontend/screens/chat/chat_page.dart';
 
 class HomePage extends StatelessWidget {

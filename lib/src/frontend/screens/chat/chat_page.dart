@@ -7,8 +7,8 @@ import 'package:simplethread/src/backend/model/message.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
-import 'package:simplethread/src/frontend/compoents/my_appbar.dart';
-import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
+import 'package:simplethread/src/frontend/widget/my_appbar.dart';
+import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class ChatPage extends StatefulWidget {
