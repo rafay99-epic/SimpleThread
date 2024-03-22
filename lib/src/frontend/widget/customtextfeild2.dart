@@ -6,6 +6,8 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final IconData prefixIcon;
   final TextEditingController controller;
+  final bool enabled;
+  final bool obsuretext;
 
   const CustomTextField({
     super.key,
@@ -14,6 +16,8 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     required this.prefixIcon,
     required this.controller,
+    this.enabled = true,
+    this.obsuretext = false,
   });
 
   @override
@@ -21,7 +25,9 @@ class CustomTextField extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
+        enabled: enabled,
         maxLines: maxLines,
+        obscureText: obsuretext,
         controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
