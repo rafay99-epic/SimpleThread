@@ -127,6 +127,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:simplethread/src/frontend/screens/setting/delete_account.dart';
+import 'package:simplethread/src/frontend/screens/setting/privacy.dart';
 
 import 'package:simplethread/src/frontend/widget/darkmodeswitch.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
@@ -206,6 +207,13 @@ class SettingPage extends StatelessWidget {
               Colors.red,
               'Delete Profile',
               DeleteProfile(),
+              context,
+            ),
+            buildListTile(
+              Icons.policy_sharp,
+              Colors.purple,
+              'Privacy Policy',
+              const PrivacyPolicyPage(),
               context,
             ),
           ],
