@@ -2,72 +2,41 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:simplethread/src/frontend/screens/chat/home.dart';
 
+//----------------------------------
+//  Auth Service Class
+//----------------------------------
 class AuthService {
-  // Initialize Firebase
+  //------------------------------------
+  //  Firebase  and Firestore Instances
+  //------------------------------------
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  //getting the current users info
+  //----------------------------------
+  //  Getting Current User
+  //----------------------------------
   User? getcurrentUser() {
     return _auth.currentUser;
   }
 
-  //login
-
-  Future<void> signInWithEmailPassword(
-      String email, String password, BuildContext context) async {
+  //----------------------------------
+  //  Sign in with Email and Password
+  //----------------------------------
+  Future<UserCredential> signInWithEmailPassword(
+      String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return userCredential;
     } on FirebaseAuthException catch (e) {
-      // Show a dialog with the error message
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            "Login Failed",
-            style: GoogleFonts.playfairDisplay(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ),
-          content: Text(
-            e.toString(),
-            style: GoogleFonts.playfairDisplay(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(
-                'OK',
-                style: GoogleFonts.playfairDisplay(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-      );
+      throw Exception(e.code);
     }
   }
 
-  //regisrter user
+  //-------------------------------------------------------------
+  //  Register with Email and Password, name and phone number
+  //-------------------------------------------------------------
   Future<UserCredential> signUpWithEmailPassword(
     String email,
     String password,
@@ -80,30 +49,57 @@ class AuthService {
         email: email,
         password: password,
       );
-      //saving the current User information into a serperate doc
+
+      await userCredential.user?.sendEmailVerification();
+
       _firestore.collection("Users").doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'email': email,
         'name': name,
         'phoneNumber': phoneNumber,
       });
+
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
     }
   }
 
-  //logout
+  //----------------------------------
+  //  Sign Out User
+  //----------------------------------
   Future<void> signOut() async {
     return await _auth.signOut();
   }
 
-  //forget password
+  //----------------------------------
+  //  Send Reset Password Link
+  //----------------------------------
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
+    }
+  }
+
+  //----------------------------------
+  //  Check User Email Verification
+  //----------------------------------
+  Future<bool> isEmailVerified() async {
+    User? user = _auth.currentUser;
+    await user?.reload();
+    return user?.emailVerified ?? false;
+  }
+
+  //----------------------------------
+  //  Send Email Verification Link
+  //----------------------------------
+  Future<void> sendVerificationEmail() async {
+    User? user = _auth.currentUser;
+
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
     }
   }
 }

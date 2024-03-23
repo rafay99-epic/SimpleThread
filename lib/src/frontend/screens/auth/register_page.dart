@@ -1,7 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+import 'package:simplethread/src/frontend/screens/auth/verify_email.dart';
+
 import 'package:simplethread/src/frontend/widget/my_button.dart';
 import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
 
@@ -11,12 +16,12 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController _confirmPwController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
-  // final String _animation = "assets/animation/register.json";
-  // final String _imageLogo = 'assets/images/register.png';
+
   RegisterPage({super.key, this.onTap});
   //register User
-  void register(BuildContext context) {
+  Future<void> register(BuildContext context) async {
     final _auth = AuthService();
+
     // pass match -> create User
     if (_pwController.text == _confirmPwController.text) {
       try {
@@ -25,6 +30,13 @@ class RegisterPage extends StatelessWidget {
           _pwController.text,
           _nameController.text,
           _phoneNumberController.text,
+        );
+
+        // Navigate to VerifyEmail page
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => VerifyEmail(),
+          ),
         );
       } catch (e) {
         showDialog(

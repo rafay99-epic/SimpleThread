@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, use_build_context_synchronously
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+import 'package:simplethread/src/frontend/screens/auth/verify_email.dart';
+import 'package:simplethread/src/frontend/screens/chat/home.dart';
 import 'package:simplethread/src/frontend/widget/my_button.dart';
 import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
 
@@ -26,11 +29,22 @@ class login_page extends StatelessWidget {
 
     //try login
     try {
-      await authiService.signInWithEmailPassword(
-        _emailController.text,
-        _pwController.text,
-        context,
-      );
+      UserCredential userCredential = await authiService
+          .signInWithEmailPassword(_emailController.text, _pwController.text);
+
+      if (userCredential.user != null && userCredential.user!.emailVerified) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => VerifyEmail(),
+          ),
+        );
+      }
     } catch (e) {
       showDialog(
         context: context,

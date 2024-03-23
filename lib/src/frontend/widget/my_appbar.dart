@@ -4,12 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   //parameters for the app bar
   final String title;
-
+  final bool backbutton;
   const MyAppBar({
     super.key,
     required this.title,
+    this.backbutton = true,
   });
-  //Define the size and making sure that the size of the app bar is perfect
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -18,6 +19,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
+      automaticallyImplyLeading: backbutton,
       title: Text(
         title,
         style: GoogleFonts.playfairDisplay(
