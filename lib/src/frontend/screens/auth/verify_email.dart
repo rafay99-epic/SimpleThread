@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
-import 'package:simplethread/src/frontend/screens/auth/login_page.dart';
+import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
 import 'package:simplethread/src/frontend/screens/chat/home.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
 
@@ -118,7 +118,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                       _auth.signOut(),
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => login_page(),
+                          builder: (context) => const LoginOrRegister(),
                         ),
                       ),
                     },

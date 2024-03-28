@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:simplethread/src/frontend/screens/auth/login_page.dart';
+import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
 
 //----------------------------------
 //  Delete User Auth and Data
@@ -60,7 +60,7 @@ class DeleteDataProfile {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => login_page(),
+        builder: (context) => const LoginOrRegister(),
       ),
     );
   }

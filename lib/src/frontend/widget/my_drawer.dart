@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
 import 'package:simplethread/src/frontend/screens/chat/home.dart';
-import 'package:simplethread/src/frontend/screens/auth/login_page.dart';
 import 'package:simplethread/src/frontend/screens/setting/setting_page.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -157,7 +157,7 @@ class MyDrawer extends StatelessWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => login_page(),
+                                builder: (context) => const LoginOrRegister(),
                               ),
                             );
                           },

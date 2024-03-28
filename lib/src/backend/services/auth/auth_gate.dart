@@ -26,7 +26,6 @@ class AuthGate extends StatelessWidget {
               return HomePage();
             }
           } else {
-            // Show a loading spinner while waiting for the stream
             return const CircularProgressIndicator();
           }
         },
