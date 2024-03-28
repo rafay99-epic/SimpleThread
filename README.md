@@ -1,13 +1,12 @@
 # Simple Thread
 
-Welcome to **Simple Thread**, a clean and user-friendly chat application built with Flutter and Firebase. Below, you'll find details about completed features, front-end and back-end changes.
+Welcome to **Simple Thread**, a clean and user-friendly chat application built with Flutter and Firebase. Below, you'll find details about completed features, front-end, and back-end changes.
 
-<img src="screenshots/Simple Thread/1.png"
-        alt="Portfolio Website " style="max-width: 80%; height: auto; display: block; margin: 0 auto;">
+<img src="screenshots/Simple Thread/1.png" alt="Portfolio Website" style="max-width: 80%; height: auto; display: block; margin: 0 auto;">
 
 # Features:
 
-Here are some features in **Simple Thread**
+Here are some features in **Simple Thread**:
 
 1. **🔐 Authentication:** Firebase-based secure login with email verification.
 2. **📬 Messaging:** User-friendly inbox with filtering, sorting, and attachment support.
@@ -22,11 +21,11 @@ Here are some features in **Simple Thread**
 
 # Running Local Development:
 
-To run this application on your own machine please follow the instructions below.
+To run this application on your machine, please follow the instructions below.
 
 ## Requirements
 
-Pleas make sure you have flutter and git installed on your machine.
+Please make sure you have Flutter and Git installed on your machine.
 
 ## Running:
 
