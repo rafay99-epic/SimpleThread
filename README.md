@@ -1,57 +1,68 @@
-# Simple Thread - Flutter x Firebase Chat Application
+# Simple Thread
 
-Welcome to **Simple Thread**, a clean and user-friendly chat application built with Flutter and Firebase. Below, you'll find details about completed features, front-end and back-end changes, as well as the remaining tasks in the TODO list.
+Welcome to **Simple Thread**, a clean and user-friendly chat application built with Flutter and Firebase. Below, you'll find details about completed features, front-end and back-end changes.
 
-# Features: 
-### Front UI Changes
-- 📝 Splash Screen
-- 📝 Login Pages
-- 📝 Register User Page
-- 📝 Home Screen Page
-- 📝 Drawer Menu
-- 📝 Light Color Mode
-- 📝 Dark Color Mode
-- 📝 AppBar Module
-- 📝 Setting page
-- 📝 About Us Page
+<img src="screenshots/Simple Thread/1.png"
+        alt="Portfolio Website " style="max-width: 80%; height: auto; display: block; margin: 0 auto;">
 
-### Back End Changes
-- 📝 Packages added
-- 📝 Firebase connection
-- 📝 Login Authentication
-- 📝 Register User
-- 📝 Chatting System
-- 📝 Error handling
+# Features:
 
-## TODO
-- 📋 Check Internet connection
-- 📋 Seen Message
-- 📋 Register user based on Name
-- 📋 Display Names in the Chat Room
+Here are some features in **Simple Thread**
 
-## Run Application
-1. Fork the Project
-2. Run `flutter pub get`
-3. Execute `flutter run` command in the terminal.
+1. **🔐 Authentication:** Firebase-based secure login with email verification.
+2. **📬 Messaging:** User-friendly inbox with filtering, sorting, and attachment support.
+3. **⚙️ Settings:** Customizable options including dark mode toggle, profile updates, and account deletion.
+4. **🚀 Full-Stack Development:** Front-end with React/Angular, back-end with Node.js/Express, and database integration.
+5. **🛡️ Security & Privacy:** Implementation of secure authentication protocols and compliance with privacy regulations.
+6. **💻 UX Design:** Responsive and accessible interfaces for an exceptional user experience.
+7. **📝 Documentation:** Well-documented codebase following coding standards and best practices.
+8. **🤝 Collaboration:** Encouragement for contributions from the open-source community with clear guidelines.
+9. **🔬 Testing & QA:** Testing frameworks, CI/CD pipelines, and bug fixes for robust performance.
+10. **📈 Scalability & Performance:** Scalable architecture and optimization techniques for improved performance.
 
-Feel free to contribute, report issues, or suggest improvements. Happy coding!
+# Running Local Development:
 
-![App Screenshots](/screenshots/screenshot1.png)
-![App Screenshots](/screenshots/screenshot2.png)
+To run this application on your own machine please follow the instructions below.
 
-## Getting Started
+## Requirements
+
+Pleas make sure you have flutter and git installed on your machine.
+
+## Running:
+
 1. Clone the repository: `git clone https://github.com/your-username/simple-thread.git`
 2. Navigate to the project directory: `cd simple-thread`
 3. Run `flutter pub get` to install dependencies.
 4. Execute `flutter run` to launch the application.
 
-## Support
-For any questions, issues, or feedback, please [open an issue](https://github.com/your-username/simple-thread/issues).
+# License
 
-## Author
-- [Abdul Rafay](https://github.com/rafay99-epic)
+This project is licensed under the [MIT License](LICENSE) 📄.
 
-Thank You [Smalick0478](https://github.com/Smalick0478) for your contribution. 
+For more details, please see the [LICENSE](LICENSE) file. 📝
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Feel free to modify and use this project according to the terms of the MIT License! 🚀
+
+# Contributors:
+
+## 👋 About the Author
+
+Hi there! I'm Abdul Rafay, the author of this project. I developed it using Flutter and Firebase. If you have any questions, feedback, or simply want to connect, don't hesitate to reach out to me! 📩
+
+You can contact me via email at [99marafay@gmail.com](mailto:99marafay@gmail.com). 📧
+
+Alternatively, you can leave a message on my [website](https://rafay99.com/). 💬
+
+Looking forward to hearing from you! 😊
+
+## Special Thanks
+
+A heartfelt thank you to [@Smalick0478](https://github.com/Smalick0478) for their exceptional contributions to our code development. Your expertise and dedication have elevated the quality of our project, and we appreciate your collaborative spirit.
+
+🚀 Thank you for making a significant impact!
+
+# 🤝 Get Involved
+
+We welcome contributions from everyone! If you have an idea for an improvement, feature, or bug fix, feel free to open a pull request. We value your input and appreciate any help you can offer to make this project even better. 🌟
+
+Thank you for considering contributing to our project! 🚀
