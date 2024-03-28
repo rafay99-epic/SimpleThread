@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -15,16 +15,21 @@ class CheckInternetPage extends StatefulWidget {
 }
 
 class _CheckInternetPageState extends State<CheckInternetPage> {
+  //-------------------------
+  // Connectivity Variables
+  //-------------------------
   final Connectivity _connectivity = Connectivity();
   late Future<ConnectivityResult> _connectivityFuture;
+  Timer? _internetCheckTimer;
 
-  Timer? _timer;
-
+  //-------------------------------
+  // Init state and dispose state
+  //-------------------------------
   @override
   void initState() {
     super.initState();
     _connectivityFuture = _connectivity.checkConnectivity();
-    _timer = Timer.periodic(
+    _internetCheckTimer = Timer.periodic(
       const Duration(seconds: 10),
       (timer) => _checkInternetAndNavigate(),
     );
@@ -32,15 +37,18 @@ class _CheckInternetPageState extends State<CheckInternetPage> {
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _internetCheckTimer?.cancel();
     super.dispose();
   }
 
+  //-------------------------
+  // Check Internet Connection
+  //-------------------------
   Future<void> _checkInternetAndNavigate() async {
     try {
       var connectivityResult = await _connectivity.checkConnectivity();
       if (connectivityResult != ConnectivityResult.none) {
-        _timer?.cancel();
+        _internetCheckTimer?.cancel();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const SplashScreen()),
@@ -51,31 +59,54 @@ class _CheckInternetPageState extends State<CheckInternetPage> {
     }
   }
 
+  //-------------------------
+  // Build Method
+  //-------------------------
   @override
   Widget build(BuildContext context) {
+    return _buildConnectivityFutureBuilder();
+  }
+
+  //-------------------------------------
+  // Build Connectivity Future Builder
+  //-------------------------------------
+  Widget _buildConnectivityFutureBuilder() {
     return FutureBuilder<ConnectivityResult>(
       future: _connectivityFuture,
-      builder:
-          (BuildContext context, AsyncSnapshot<ConnectivityResult> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LoadingScreen();
-        } else if (snapshot.data == ConnectivityResult.none) {
-          return Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Lottie.asset(
-                    'assets/animation/no_internet3.json',
-                  ),
-                ],
-              ),
+      builder: (context, snapshot) =>
+          _buildConnectivitySnapshotBuilder(context, snapshot),
+    );
+  }
+
+  //--------------------------------------
+  // Build Connectivity Snapshot Builder
+  //---------------------------------------
+  Widget _buildConnectivitySnapshotBuilder(
+      BuildContext context, AsyncSnapshot<ConnectivityResult> snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const LoadingScreen();
+    } else if (snapshot.data == ConnectivityResult.none) {
+      return _buildNoInternetConnectionScreen();
+    } else {
+      return const SplashScreen();
+    }
+  }
+
+  //--------------------------------------
+  // No Internet Connection Screen
+  //---------------------------------------
+  Widget _buildNoInternetConnectionScreen() {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Lottie.asset(
+              'assets/animation/no_internet3.json',
             ),
-          );
-        } else {
-          return const SplashScreen();
-        }
-      },
+          ],
+        ),
+      ),
     );
   }
 }

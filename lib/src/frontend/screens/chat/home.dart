@@ -24,6 +24,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: const MyAppBar(
         title: 'Simple Thread',
+        backbutton: false,
       ),
       body: _buildUserList(),
     );
