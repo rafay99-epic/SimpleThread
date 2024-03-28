@@ -1,137 +1,12 @@
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:page_transition/page_transition.dart';
-// import 'package:simplethread/src/frontend/screens/setting/delete_account.dart';
-
-// import 'package:simplethread/src/frontend/widget/darkmodeswitch.dart';
-// import 'package:simplethread/src/frontend/widget/my_appbar.dart';
-// import 'package:simplethread/src/frontend/widget/my_drawer.dart';
-// import 'package:simplethread/src/frontend/screens/setting/ProfileUpdate.dart';
-// import 'package:simplethread/src/frontend/screens/setting/contact_page.dart';
-
-// class SettingPage extends StatelessWidget {
-//   const SettingPage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Theme.of(context).colorScheme.background,
-//       appBar: const MyAppBar(title: "Settings"),
-//       drawer: MyDrawer(),
-//       body: Padding(
-//         padding: const EdgeInsets.only(top: 20.0),
-//         child: ListView(
-//           children: <Widget>[
-//             const ListTile(
-//               leading: Icon(
-//                 Icons.dark_mode,
-//               ),
-//               title: DarkModeSwitch(),
-//               horizontalTitleGap: -6.0,
-//             ),
-//             ListTile(
-//               title: Row(
-//                 children: <Widget>[
-//                   const Icon(
-//                     Icons.contact_mail,
-//                     color: Colors.blue,
-//                   ),
-//                   const SizedBox(
-//                     width: 8.0,
-//                   ),
-//                   Text(
-//                     'Contact US',
-//                     style: GoogleFonts.playfairDisplay(
-//                       textStyle: Theme.of(context).textTheme.titleLarge,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               onTap: () {
-//                 Navigator.push(
-//                   context,
-//                   PageTransition(
-//                     type: PageTransitionType.rightToLeftWithFade,
-//                     child: ContactPage(),
-//                     duration: const Duration(milliseconds: 200),
-//                   ),
-//                 );
-//               },
-//             ),
-//             ListTile(
-//               title: Row(
-//                 children: <Widget>[
-//                   const Icon(
-//                     Icons.person_3_sharp,
-//                     color: Colors.green,
-//                   ),
-//                   const SizedBox(
-//                     width: 8.0,
-//                   ),
-//                   Text(
-//                     'Profile',
-//                     style: GoogleFonts.playfairDisplay(
-//                       textStyle: Theme.of(context).textTheme.titleLarge,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               onTap: () {
-//                 Navigator.push(
-//                   context,
-//                   PageTransition(
-//                     type: PageTransitionType.rightToLeftWithFade,
-//                     child: const ProfileUpdate(),
-//                     duration: const Duration(milliseconds: 200),
-//                   ),
-//                 );
-//               },
-//             ),
-//             ListTile(
-//               title: Row(
-//                 children: <Widget>[
-//                   const Icon(
-//                     Icons.delete_sweep,
-//                     color: Colors.red,
-//                   ),
-//                   const SizedBox(
-//                     width: 8.0,
-//                   ),
-//                   Text(
-//                     'Delete Profile',
-//                     style: GoogleFonts.playfairDisplay(
-//                       textStyle: Theme.of(context).textTheme.titleLarge,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               onTap: () {
-//                 Navigator.push(
-//                   context,
-//                   PageTransition(
-//                     type: PageTransitionType.rightToLeftWithFade,
-//                     child: const DeleteProfile(),
-//                     duration: const Duration(milliseconds: 200),
-//                   ),
-//                 );
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:simplethread/src/backend/services/auth/auth_service.dart';
+import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
 import 'package:simplethread/src/frontend/screens/setting/delete_account.dart';
 import 'package:simplethread/src/frontend/screens/setting/privacy.dart';
-
 import 'package:simplethread/src/frontend/widget/darkmodeswitch.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
-import 'package:simplethread/src/frontend/widget/my_drawer.dart';
 import 'package:simplethread/src/frontend/screens/setting/ProfileUpdate.dart';
 import 'package:simplethread/src/frontend/screens/setting/contact_page.dart';
 
@@ -173,10 +48,11 @@ class SettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = AuthService();
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: const MyAppBar(title: "Settings"),
-      drawer: MyDrawer(),
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: ListView(
@@ -215,6 +91,80 @@ class SettingPage extends StatelessWidget {
               'Privacy Policy',
               const PrivacyPolicyPage(),
               context,
+            ),
+            ListTile(
+              title: Row(
+                children: <Widget>[
+                  const Icon(
+                    Icons.logout_rounded,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    width: 8.0,
+                  ),
+                  Text(
+                    "Logout",
+                    style: GoogleFonts.roboto(
+                      textStyle: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      title: Text(
+                        'Logout',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      content: Text(
+                        'Do you want to logout?',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          child: Text(
+                            'Yes',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          onPressed: () {
+                            _auth.signOut();
+
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginOrRegister(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
             ),
           ],
         ),

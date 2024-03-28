@@ -39,7 +39,7 @@ class DeleteProfile extends StatelessWidget {
               ),
               Text(
                 'Delete Account',
-                style: GoogleFonts.playfairDisplay(
+                style: GoogleFonts.roboto(
                   letterSpacing: .5,
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class DeleteProfile extends StatelessWidget {
               const SizedBox(height: 35),
               Text(
                 'Consequences of Deleting Your Account',
-                style: GoogleFonts.playfairDisplay(
+                style: GoogleFonts.roboto(
                   letterSpacing: .5,
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class DeleteProfile extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           '• ',
-                          style: GoogleFonts.playfairDisplay(
+                          style: GoogleFonts.roboto(
                             fontSize: 20,
                             color: Theme.of(context).colorScheme.primary,
                           ),
@@ -78,7 +78,7 @@ class DeleteProfile extends StatelessWidget {
                         Expanded(
                           child: Text(
                             item,
-                            style: GoogleFonts.playfairDisplay(
+                            style: GoogleFonts.roboto(
                               fontSize: 20,
                               color: Theme.of(context).colorScheme.primary,
                             ),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:simplethread/src/backend/services/profile/profile.dart';
+import 'package:simplethread/src/backend/services/profile/profile_update.dart';
 import 'package:simplethread/src/frontend/widget/customtextfeild2.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
 
@@ -103,7 +103,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       builder: (context) => AlertDialog(
         title: Text(
           "You need to have an account..Please Login",
-          style: GoogleFonts.playfairDisplay(
+          style: GoogleFonts.roboto(
             fontWeight: FontWeight.bold,
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -119,7 +119,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       builder: (context) => AlertDialog(
         title: Text(
           "Your Data Does not Exist, Please Create an account",
-          style: GoogleFonts.playfairDisplay(
+          style: GoogleFonts.roboto(
             fontWeight: FontWeight.bold,
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -134,7 +134,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       builder: (context) => AlertDialog(
         title: Text(
           error.toString(),
-          style: GoogleFonts.playfairDisplay(
+          style: GoogleFonts.roboto(
             fontWeight: FontWeight.bold,
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -249,7 +249,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       builder: (context) => AlertDialog(
         title: Text(
           message,
-          style: GoogleFonts.playfairDisplay(
+          style: GoogleFonts.roboto(
             fontWeight: FontWeight.bold,
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -264,7 +264,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(title: "Profile"),
+      appBar: const MyAppBar(title: "Update Profile"),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
@@ -319,8 +319,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                   ElevatedButton(
                     onPressed: () => updateProfile(),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.inversePrimary,
+                      backgroundColor: Theme.of(context).colorScheme.background,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 50, vertical: 15),
                       shape: RoundedRectangleBorder(
@@ -339,8 +338,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                   ElevatedButton(
                     onPressed: () => {Navigator.of(context).pop()},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.inversePrimary,
+                      backgroundColor: Theme.of(context).colorScheme.background,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 50, vertical: 15),
                       shape: RoundedRectangleBorder(

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/frontend/screens/auth/verify_email.dart';
-import 'package:simplethread/src/frontend/screens/chat/home.dart';
+import 'package:simplethread/src/frontend/screens/home/bottom_navbar.dart';
 import 'package:simplethread/src/frontend/widget/my_button.dart';
 import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
 
@@ -35,13 +35,13 @@ class login_page extends StatelessWidget {
       if (userCredential.user != null && userCredential.user!.emailVerified) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => HomePage(),
+            builder: (context) => const Navbar(),
           ),
         );
       } else {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => VerifyEmail(),
+            builder: (context) => const VerifyEmail(),
           ),
         );
       }
@@ -81,104 +81,106 @@ class login_page extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //Intro text
-            Text(
-              'Login',
-              style: GoogleFonts.roboto(
-                textStyle: TextStyle(
-                  letterSpacing: .5,
-                  fontSize: 42,
-                  fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //Intro text
+              Text(
+                'Login',
+                style: GoogleFonts.roboto(
+                  textStyle: TextStyle(
+                    letterSpacing: .5,
+                    fontSize: 42,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
+              //Welcome Back Messaage
+              Text(
+                "Welcome Back, you've been missed",
+                style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
+                  fontSize: 16,
                 ),
               ),
-            ),
-            //Welcome Back Messaage
-            Text(
-              "Welcome Back, you've been missed",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 16,
+              const SizedBox(
+                height: 25,
               ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
 
-            //Email TextFeild
-            MyTextFeild(
-              hintText: "Email",
-              obsuretext: false,
-              controller: _emailController,
-              icons: Icons.email_rounded,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            //password TextFeild
-            MyTextFeild(
-              hintText: "Password",
-              obsuretext: true,
-              controller: _pwController,
-              icons: Icons.password_rounded,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            //login Button
-            MyButton(
-              text: "Login",
-              onTap: () => login(context),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Forgot Your Password? ',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    )),
-                GestureDetector(
-                  onTap: onForgotPassword,
-                  child: Text(
-                    'Click here',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
+              //Email TextFeild
+              MyTextFeild(
+                hintText: "Email",
+                obsuretext: false,
+                controller: _emailController,
+                icons: Icons.email_rounded,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              //password TextFeild
+              MyTextFeild(
+                hintText: "Password",
+                obsuretext: true,
+                controller: _pwController,
+                icons: Icons.password_rounded,
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              //login Button
+              MyButton(
+                text: "Login",
+                onTap: () => login(context),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Forgot Your Password? ',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      )),
+                  GestureDetector(
+                    onTap: onForgotPassword,
+                    child: Text(
+                      'Click here',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            //register Now Togo
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Not a member? ',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    )),
-                GestureDetector(
-                  onTap: onTap,
-                  child: Text(
-                    'Register now',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              //register Now Togo
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Not a member? ',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      )),
+                  GestureDetector(
+                    onTap: onTap,
+                    child: Text(
+                      'Register now',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

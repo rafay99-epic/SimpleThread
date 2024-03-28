@@ -76,115 +76,117 @@ class RegisterPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //Intro text
-            Text(
-              'Sign Up',
-              style: GoogleFonts.roboto(
-                textStyle: TextStyle(
-                  letterSpacing: .5,
-                  fontSize: 42,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            //Welcome Back Messaage
-            Text(
-              "Let's create an account for you",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 16,
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-
-            //Email TextFeild
-            MyTextFeild(
-              hintText: "Email",
-              obsuretext: false,
-              controller: _emailController,
-              icons: Icons.email_rounded,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            MyTextFeild(
-              hintText: "Name",
-              obsuretext: false,
-              controller: _nameController,
-              icons: Icons.person_rounded,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            MyTextFeild(
-              hintText: "Phone Number",
-              obsuretext: false,
-              controller: _phoneNumberController,
-              icons: Icons.phone_rounded,
-              isNumeric: true,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            //password TextFeild
-            MyTextFeild(
-              hintText: "Password",
-              obsuretext: true,
-              controller: _pwController,
-              icons: Icons.password_rounded,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            //Confirm password TextFeild
-            MyTextFeild(
-              hintText: "Confirm password",
-              obsuretext: true,
-              controller: _confirmPwController,
-              icons: Icons.password_rounded,
-            ),
-
-            const SizedBox(
-              height: 25,
-            ),
-            //login Button
-            MyButton(
-              text: "Register",
-              onTap: () => register(context),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            //register Now Togo
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Already have an account? ',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    )),
-                GestureDetector(
-                  onTap: onTap,
-                  child: Text(
-                    'Login now',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //Intro text
+              Text(
+                'Sign Up',
+                style: GoogleFonts.roboto(
+                  textStyle: TextStyle(
+                    letterSpacing: .5,
+                    fontSize: 42,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              //Welcome Back Messaage
+              Text(
+                "Let's create an account for you",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+
+              //Email TextFeild
+              MyTextFeild(
+                hintText: "Email",
+                obsuretext: false,
+                controller: _emailController,
+                icons: Icons.email_rounded,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MyTextFeild(
+                hintText: "Name",
+                obsuretext: false,
+                controller: _nameController,
+                icons: Icons.person_rounded,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MyTextFeild(
+                hintText: "Phone Number",
+                obsuretext: false,
+                controller: _phoneNumberController,
+                icons: Icons.phone_rounded,
+                isNumeric: true,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              //password TextFeild
+              MyTextFeild(
+                hintText: "Password",
+                obsuretext: true,
+                controller: _pwController,
+                icons: Icons.password_rounded,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              //Confirm password TextFeild
+              MyTextFeild(
+                hintText: "Confirm password",
+                obsuretext: true,
+                controller: _confirmPwController,
+                icons: Icons.password_rounded,
+              ),
+
+              const SizedBox(
+                height: 25,
+              ),
+              //login Button
+              MyButton(
+                text: "Register",
+                onTap: () => register(context),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              //register Now Togo
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Already have an account? ',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      )),
+                  GestureDetector(
+                    onTap: onTap,
+                    child: Text(
+                      'Login now',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

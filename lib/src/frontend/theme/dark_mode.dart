@@ -9,4 +9,5 @@ ThemeData darkMode = ThemeData(
     tertiary: Colors.grey.shade800,
     inversePrimary: Colors.grey.shade300,
   ),
+  fontFamily: 'Roboto',
 );

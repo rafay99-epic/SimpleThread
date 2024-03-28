@@ -13,8 +13,8 @@ class LoginOrRegister extends StatefulWidget {
 
 class _LoginOrRegisterState extends State<LoginOrRegister> {
   bool showLoginPage = true;
-  bool showRegisterPage = false; // new state variable
-  bool showForgotPasswordPage = false; // new state variable
+  bool showRegisterPage = false;
+  bool showForgotPasswordPage = false;
 
   void togglePages() {
     setState(() {
@@ -24,7 +24,6 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
   }
 
   void showForgotPassword() {
-    // new method to show the ForgotPassword page
     setState(() {
       showForgotPasswordPage = true;
       showLoginPage = false;
@@ -33,7 +32,6 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
   }
 
   void showLoginPage2() {
-    // new method to show the login page
     setState(() {
       showLoginPage = true;
       showForgotPasswordPage = false;

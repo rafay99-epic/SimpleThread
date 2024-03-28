@@ -2,12 +2,13 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
+import 'package:simplethread/src/frontend/screens/errorAndLoading/empty_screen.dart';
+import 'package:simplethread/src/frontend/screens/errorAndLoading/error.dart';
+import 'package:simplethread/src/frontend/screens/errorAndLoading/loading.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
-import 'package:simplethread/src/frontend/widget/my_drawer.dart';
+
 import 'package:simplethread/src/frontend/widget/user_title.dart';
 import 'package:simplethread/src/frontend/screens/chat/chat_page.dart';
 
@@ -22,10 +23,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyAppBar(
-        title: 'Home',
-        // icon: Icons.home_rounded,
+        title: 'Simple Thread',
       ),
-      drawer: MyDrawer(),
       body: _buildUserList(),
     );
   }
@@ -36,46 +35,21 @@ class HomePage extends StatelessWidget {
       builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
         //error Handelling
         if (snapshot.hasError) {
-          return SingleChildScrollView(
+          return const SingleChildScrollView(
             child: Center(
-              child: Lottie.asset('assets/animation/datanotfound.json'),
+              child: ErrorScreen(),
             ),
           );
         }
 
         //loading
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: Lottie.asset('assets/animation/loader.json'),
-          );
+          return const LoadingScreen();
         }
 
         // Check if there are any users
         if (snapshot.hasData && snapshot.data!.isEmpty) {
-          return SingleChildScrollView(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 8.0, right: 8.0, top: 20.0, bottom: 20.0),
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(height: 10),
-                    Lottie.asset('assets/animation/datanotfound.json'),
-                    const SizedBox(height: 10),
-                    Text(
-                      "Sorry!! No search results found.",
-                      style: GoogleFonts.roboto(
-                        fontSize: 20,
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
+          return const NoDataFound();
         }
 
         //return list view
@@ -98,15 +72,6 @@ class HomePage extends StatelessWidget {
       return UserTile(
         text: userData['name'],
         onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => ChatPage(
-          //       receiverEmail: userData["name"],
-          //       receiverID: userData["uid"],
-          //     ),
-          //   ),
-          // );
           Navigator.push(
             context,
             PageRouteBuilder(

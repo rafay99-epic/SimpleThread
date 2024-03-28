@@ -2,8 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:simplethread/firebase_options.dart';
 import 'package:provider/provider.dart';
-
-import 'package:simplethread/src/frontend/screens/check_internet_page.dart';
+import 'package:simplethread/src/frontend/screens/internet_check/check_internet_page.dart';
 import 'package:simplethread/src/frontend/theme/theme_provider.dart';
 
 void main() async {
