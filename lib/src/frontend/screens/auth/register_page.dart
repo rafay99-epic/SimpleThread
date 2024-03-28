@@ -1,26 +1,42 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
-import 'package:simplethread/src/frontend/compoents/my_button.dart';
-import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
+import 'package:simplethread/src/frontend/screens/auth/verify_email.dart';
+
+import 'package:simplethread/src/frontend/widget/my_button.dart';
+import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
 
 class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
   final TextEditingController _confirmPwController = TextEditingController();
-  // final String _animation = "assets/animation/register.json";
-  // final String _imageLogo = 'assets/images/register.png';
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+
   RegisterPage({super.key, this.onTap});
   //register User
-  void register(BuildContext context) {
+  Future<void> register(BuildContext context) async {
     final _auth = AuthService();
+
     // pass match -> create User
     if (_pwController.text == _confirmPwController.text) {
       try {
         _auth.signUpWithEmailPassword(
           _emailController.text,
           _pwController.text,
+          _nameController.text,
+          _phoneNumberController.text,
+        );
+
+        // Navigate to VerifyEmail page
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const VerifyEmail(),
+          ),
         );
       } catch (e) {
         showDialog(
@@ -28,7 +44,7 @@ class RegisterPage extends StatelessWidget {
           builder: (context) => AlertDialog(
             title: Text(
               e.toString(),
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.roboto(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -42,7 +58,7 @@ class RegisterPage extends StatelessWidget {
         builder: (context) => AlertDialog(
           title: Text(
             "Verify Password Is Not Matching",
-            style: GoogleFonts.playfairDisplay(
+            style: GoogleFonts.roboto(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.primary,
             ),
@@ -66,7 +82,7 @@ class RegisterPage extends StatelessWidget {
             //Intro text
             Text(
               'Sign Up',
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.roboto(
                 textStyle: TextStyle(
                   letterSpacing: .5,
                   fontSize: 42,
@@ -96,6 +112,25 @@ class RegisterPage extends StatelessWidget {
               obsuretext: false,
               controller: _emailController,
               icons: Icons.email_rounded,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            MyTextFeild(
+              hintText: "Name",
+              obsuretext: false,
+              controller: _nameController,
+              icons: Icons.person_rounded,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            MyTextFeild(
+              hintText: "Phone Number",
+              obsuretext: false,
+              controller: _phoneNumberController,
+              icons: Icons.phone_rounded,
+              isNumeric: true,
             ),
             const SizedBox(
               height: 10,

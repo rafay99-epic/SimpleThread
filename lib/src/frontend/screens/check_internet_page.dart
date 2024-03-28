@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,7 +29,6 @@ class _CheckInternetPageState extends State<CheckInternetPage> {
     try {
       var connectivityResult = await _connectivity.checkConnectivity();
       if (connectivityResult != ConnectivityResult.none) {
-        // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const SplashScreen()),
@@ -76,7 +77,7 @@ class _CheckInternetPageState extends State<CheckInternetPage> {
             ),
           );
         } else {
-          return const SplashScreen(); // Show SplashScreen if there is internet connection
+          return const SplashScreen();
         }
       },
     );

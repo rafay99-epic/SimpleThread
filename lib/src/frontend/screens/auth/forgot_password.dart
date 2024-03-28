@@ -1,27 +1,66 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
-import 'package:simplethread/src/frontend/compoents/my_button.dart';
-import 'package:simplethread/src/frontend/compoents/my_textfeild.dart';
+import 'package:simplethread/src/frontend/widget/my_button.dart';
+import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
 
 // ignore: camel_case_types
-class login_page extends StatelessWidget {
+class ForgotPassword extends StatelessWidget {
+  //on tap register page
+  final void Function()? onTapLogin;
+
+  //on tap forgot password page
+  final void Function() onForgotPassword;
+
   //email and Passwor Controller
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _pwController = TextEditingController();
-  login_page({super.key, this.onTap});
+
+  ForgotPassword({super.key, this.onTapLogin, required this.onForgotPassword});
 
   //login function
-  void login(BuildContext context) async {
+  void forgetPassword(BuildContext context) async {
     //get auth service
     final authiService = AuthService();
 
     //try login
     try {
-      await authiService.signInWithEmailPassword(
-        _emailController.text,
-        _pwController.text,
-      );
+      if (_emailController.text.isNotEmpty) {
+        //forget password
+        authiService.sendPasswordResetEmail(_emailController.text);
+        _emailController.clear();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            showCloseIcon: true,
+            closeIconColor: Colors.red,
+            content: Text(
+              'Reset link has been sent to your email',
+              style: GoogleFonts.roboto(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            showCloseIcon: true,
+            duration: const Duration(seconds: 2),
+            closeIconColor: Colors.red,
+            content: Text(
+              'Please enter your email',
+              style: GoogleFonts.roboto(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          ),
+        );
+      }
     } catch (e) {
       // ignore: use_build_context_synchronously
       showDialog(
@@ -37,12 +76,7 @@ class login_page extends StatelessWidget {
         ),
       );
     }
-
-    //catch error
   }
-
-  //on tap register page
-  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +88,7 @@ class login_page extends StatelessWidget {
           children: [
             //Intro text
             Text(
-              'Login',
+              'Forgot Password',
               style: GoogleFonts.playfairDisplay(
                 textStyle: TextStyle(
                   letterSpacing: .5,
@@ -66,7 +100,7 @@ class login_page extends StatelessWidget {
             ),
             //Welcome Back Messaage
             Text(
-              "Welcome Back, you've been missed",
+              "Please Enter your Email Address",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 16,
@@ -86,36 +120,26 @@ class login_page extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            //password TextFeild
-            MyTextFeild(
-              hintText: "Password",
-              obsuretext: true,
-              controller: _pwController,
-              icons: Icons.password_rounded,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            //login Button
+
             MyButton(
-              text: "Login",
-              onTap: () => login(context),
+              text: "Send Email",
+              onTap: () => forgetPassword(context),
             ),
             const SizedBox(
-              height: 15,
+              height: 10,
             ),
-            //register Now Togo
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Not a member? ',
+                Text('Remember your Password? ',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                     )),
                 GestureDetector(
-                  onTap: onTap,
+                  onTap: onTapLogin,
                   child: Text(
-                    'Register now',
+                    'Go Back to Login',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary,

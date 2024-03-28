@@ -6,6 +6,7 @@ class MyTextFeild extends StatelessWidget {
   final TextEditingController controller;
   final IconData icons;
   final FocusNode? focusNode;
+  final bool isNumeric;
   const MyTextFeild({
     super.key,
     required this.hintText,
@@ -13,6 +14,7 @@ class MyTextFeild extends StatelessWidget {
     required this.controller,
     required this.icons,
     this.focusNode,
+    this.isNumeric = false,
   });
 
   @override
@@ -26,6 +28,7 @@ class MyTextFeild extends StatelessWidget {
         obscureText: obsuretext,
         controller: controller,
         focusNode: focusNode,
+        keyboardType: isNumeric ? TextInputType.number : null,
         style: TextStyle(fontSize: screenHeight * 0.02), // 2% of screen height
         decoration: InputDecoration(
             //this is the enable the Text Feild color and design
