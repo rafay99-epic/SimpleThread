@@ -30,64 +30,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Widget _buildUserList() {
-  //   return StreamBuilder(
-  //     builder: (context, snapshot) {
-  //       //error Handelling
-  //       try {
-  //         if (snapshot.hasError) {
-  //           return const Text("Error");
-  //         }
-  //       } catch (e) {
-  //         showDialog(
-  //           context: context,
-  //           builder: (context) => AlertDialog(
-  //             title: Text(
-  //               e.toString(),
-  //               style: GoogleFonts.playfairDisplay(
-  //                 fontWeight: FontWeight.bold,
-  //                 color: Theme.of(context).colorScheme.primary,
-  //               ),
-  //             ),
-  //           ),
-  //         );
-  //       }
-
-  //       //loading
-  //       try {
-  //         if (snapshot.connectionState == ConnectionState.waiting) {
-  //           return const Center(
-  //             child: CircularProgressIndicator(),
-  //           );
-  //         }
-  //       } catch (e) {
-  //         showDialog(
-  //           context: context,
-  //           builder: (context) => AlertDialog(
-  //             title: Text(
-  //               e.toString(),
-  //               style: GoogleFonts.playfairDisplay(
-  //                 fontWeight: FontWeight.bold,
-  //                 color: Theme.of(context).colorScheme.primary,
-  //               ),
-  //             ),
-  //           ),
-  //         );
-  //       }
-  //       //return list view
-  //       return ListView(
-  //         children: snapshot.data!
-  //             .map<Widget>((userDate) => _builderUserListItem(
-  //                   userDate,
-  //                   context,
-  //                 ))
-  //             .toList(),
-  //       );
-  //     },
-  //     stream: _chatService.getUserStream(),
-  //   );
-  // }
-
   Widget _buildUserList() {
     return StreamBuilder(
       stream: _chatService.getUserStream(),
@@ -103,10 +45,8 @@ class HomePage extends StatelessWidget {
 
         //loading
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SingleChildScrollView(
-            child: Center(
-              child: Lottie.asset('assets/animation/loader.json'),
-            ),
+          return Center(
+            child: Lottie.asset('assets/animation/loader.json'),
           );
         }
 
@@ -124,7 +64,7 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 10),
                     Text(
                       "Sorry!! No search results found.",
-                      style: GoogleFonts.playfairDisplay(
+                      style: GoogleFonts.roboto(
                         fontSize: 20,
                         color: Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.bold,
@@ -158,13 +98,34 @@ class HomePage extends StatelessWidget {
       return UserTile(
         text: userData['name'],
         onTap: () {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => ChatPage(
+          //       receiverEmail: userData["name"],
+          //       receiverID: userData["uid"],
+          //     ),
+          //   ),
+          // );
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => ChatPage(
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => ChatPage(
                 receiverEmail: userData["name"],
                 receiverID: userData["uid"],
               ),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                var begin = const Offset(1.0, 0.0);
+                var end = Offset.zero;
+                var tween = Tween(begin: begin, end: end);
+                var offsetAnimation = animation.drive(tween);
+
+                return SlideTransition(
+                  position: offsetAnimation,
+                  child: child,
+                );
+              },
             ),
           );
         },

@@ -52,7 +52,7 @@ class login_page extends StatelessWidget {
           title: const Text("Login Failed"),
           content: Text(
             e.toString(),
-            style: GoogleFonts.playfairDisplay(
+            style: GoogleFonts.roboto(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.primary,
             ),
@@ -61,7 +61,7 @@ class login_page extends StatelessWidget {
             TextButton(
               child: Text(
                 'OK',
-                style: GoogleFonts.playfairDisplay(
+                style: GoogleFonts.roboto(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -87,7 +87,7 @@ class login_page extends StatelessWidget {
             //Intro text
             Text(
               'Login',
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.roboto(
                 textStyle: TextStyle(
                   letterSpacing: .5,
                   fontSize: 42,

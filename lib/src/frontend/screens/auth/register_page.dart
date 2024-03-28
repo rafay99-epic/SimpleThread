@@ -35,7 +35,7 @@ class RegisterPage extends StatelessWidget {
         // Navigate to VerifyEmail page
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => VerifyEmail(),
+            builder: (context) => const VerifyEmail(),
           ),
         );
       } catch (e) {
@@ -44,7 +44,7 @@ class RegisterPage extends StatelessWidget {
           builder: (context) => AlertDialog(
             title: Text(
               e.toString(),
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.roboto(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -58,7 +58,7 @@ class RegisterPage extends StatelessWidget {
         builder: (context) => AlertDialog(
           title: Text(
             "Verify Password Is Not Matching",
-            style: GoogleFonts.playfairDisplay(
+            style: GoogleFonts.roboto(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.primary,
             ),
@@ -82,7 +82,7 @@ class RegisterPage extends StatelessWidget {
             //Intro text
             Text(
               'Sign Up',
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.roboto(
                 textStyle: TextStyle(
                   letterSpacing: .5,
                   fontSize: 42,

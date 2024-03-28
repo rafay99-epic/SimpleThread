@@ -22,7 +22,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: backbutton,
       title: Text(
         title,
-        style: GoogleFonts.playfairDisplay(
+        style: GoogleFonts.roboto(
           textStyle: TextStyle(
             letterSpacing: .5,
             fontWeight: FontWeight.bold,

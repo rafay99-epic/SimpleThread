@@ -152,7 +152,7 @@ class SettingPage extends StatelessWidget {
           ),
           Text(
             text,
-            style: GoogleFonts.playfairDisplay(
+            style: GoogleFonts.roboto(
               textStyle: Theme.of(context).textTheme.titleLarge,
             ),
           ),

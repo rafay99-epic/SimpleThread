@@ -91,7 +91,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
               Center(
                 child: Text(
                   "Please Verify Your Email Address",
-                  style: GoogleFonts.playfairDisplay(
+                  style: GoogleFonts.roboto(
                     letterSpacing: .5,
                     fontSize: 25,
                     color: Theme.of(context).colorScheme.primary,
@@ -108,7 +108,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   TextButton(
                     child: Text(
                       'Back to Login',
-                      style: GoogleFonts.playfairDisplay(
+                      style: GoogleFonts.roboto(
                         letterSpacing: .5,
                         fontSize: 20,
                         color: Theme.of(context).colorScheme.primary,
@@ -149,7 +149,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                           },
                     child: Text(
                       'Resend Confirm Email',
-                      style: GoogleFonts.playfairDisplay(
+                      style: GoogleFonts.roboto(
                         letterSpacing: .5,
                         fontSize: 20,
                         color: Theme.of(context).colorScheme.primary,

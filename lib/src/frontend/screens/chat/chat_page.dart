@@ -43,16 +43,27 @@ class _ChatPageState extends State<ChatPage> {
   //for text feild focus
   FocusNode myFocusNode = FocusNode();
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   myFocusNode.addListener(() {
+  //     if (myFocusNode.hasFocus) {
+  //       Future.delayed(const Duration(milliseconds: 500), () => scrollDown());
+  //     }
+  //   });
+
+  //   Future.delayed(const Duration(milliseconds: 500), () => scrollDown());
+  // }
   @override
   void initState() {
     super.initState();
     myFocusNode.addListener(() {
       if (myFocusNode.hasFocus) {
-        Future.delayed(const Duration(milliseconds: 500), () => scrollDown());
+        WidgetsBinding.instance.addPostFrameCallback((_) => scrollDown());
       }
     });
 
-    Future.delayed(const Duration(milliseconds: 500), () => scrollDown());
+    WidgetsBinding.instance.addPostFrameCallback((_) => scrollDown());
   }
 
   @override
@@ -63,12 +74,21 @@ class _ChatPageState extends State<ChatPage> {
 
   //scroll controller
   final ScrollController _scrollController = ScrollController();
+  // void scrollDown() {
+  //   _scrollController.animateTo(
+  //     _scrollController.position.maxScrollExtent,
+  //     duration: const Duration(seconds: 1),
+  //     curve: Curves.fastOutSlowIn,
+  //   );
+  // }
   void scrollDown() {
-    _scrollController.animateTo(
-      _scrollController.position.maxScrollExtent,
-      duration: const Duration(seconds: 1),
-      curve: Curves.fastOutSlowIn,
-    );
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(seconds: 1),
+        curve: Curves.fastOutSlowIn,
+      );
+    }
   }
 
   //* The main Widget

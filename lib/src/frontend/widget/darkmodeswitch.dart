@@ -11,7 +11,7 @@ class DarkModeSwitch extends StatelessWidget {
     return SwitchListTile(
       title: Text(
         'Dark Mode',
-        style: GoogleFonts.playfairDisplay(
+        style: GoogleFonts.roboto(
           textStyle: Theme.of(context).textTheme.titleLarge,
         ),
       ),

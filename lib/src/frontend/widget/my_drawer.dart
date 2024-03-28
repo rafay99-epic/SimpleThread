@@ -33,7 +33,7 @@ class MyDrawer extends StatelessWidget {
               ),
               Text(
                 'Simple Thread',
-                style: GoogleFonts.playfairDisplay(
+                style: GoogleFonts.roboto(
                   textStyle: TextStyle(
                     letterSpacing: .5,
                     fontSize: 20,
@@ -79,7 +79,7 @@ class MyDrawer extends StatelessWidget {
                 child: ListTile(
                   title: Text(
                     "S E T T I N G S",
-                    style: GoogleFonts.playfairDisplay(
+                    style: GoogleFonts.roboto(
                       color: Theme.of(context).colorScheme.inversePrimary,
                       // fontWeight: FontWeight.bold,
                     ),
@@ -106,7 +106,7 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               title: Text(
                 "L O G O U T",
-                style: GoogleFonts.playfairDisplay(
+                style: GoogleFonts.roboto(
                   color: Theme.of(context).colorScheme.inversePrimary,
                   // fontWeight: FontWeight.bold,
                 ),
