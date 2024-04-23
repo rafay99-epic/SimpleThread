@@ -1,8 +1,9 @@
 import 'dart:async';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:simplethread/src/backend/permissions/notification.dart';
+import 'package:simplethread/src/backend/services/NotificationSend/notification_send.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_gate.dart';
 
@@ -17,20 +18,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class SsplasScreenhState extends State<SplashScreen> {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-
-  void _requestNotificationPermissions() async {
-    await _firebaseMessaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-  }
+  NotificationPermission notificationPermission = NotificationPermission();
 
   @override
   void initState() {
     super.initState();
-    _requestNotificationPermissions();
+    notificationPermission.requestNotificationPermissions();
+    const MessageListener();
     Timer(const Duration(seconds: 4), () {
       Navigator.pushReplacement(
           context,
