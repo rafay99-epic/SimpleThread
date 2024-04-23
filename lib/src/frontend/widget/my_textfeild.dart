@@ -4,7 +4,7 @@ class MyTextFeild extends StatelessWidget {
   final String hintText;
   final bool obsuretext;
   final TextEditingController controller;
-  final IconData icons;
+  final IconData? icons;
   final FocusNode? focusNode;
   final bool isNumeric;
   const MyTextFeild({
@@ -12,7 +12,7 @@ class MyTextFeild extends StatelessWidget {
     required this.hintText,
     required this.obsuretext,
     required this.controller,
-    required this.icons,
+    this.icons,
     this.focusNode,
     this.isNumeric = false,
   });
@@ -31,27 +31,28 @@ class MyTextFeild extends StatelessWidget {
         keyboardType: isNumeric ? TextInputType.number : null,
         style: TextStyle(fontSize: screenHeight * 0.02),
         decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.tertiary,
-              ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.tertiary,
             ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            //filling information style
-            fillColor: Theme.of(context).colorScheme.secondary,
-            filled: true,
-            hintText: hintText,
-            hintStyle: TextStyle(
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
               color: Theme.of(context).colorScheme.primary,
             ),
-            prefixIcon: Icon(
-              icons,
-              color: Theme.of(context).colorScheme.primary,
-            )),
+          ),
+          //filling information style
+          fillColor: Theme.of(context).colorScheme.secondary,
+          filled: true,
+          hintText: hintText,
+          hintStyle: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          prefixIcon: Icon(
+            icons,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
       ),
     );
   }

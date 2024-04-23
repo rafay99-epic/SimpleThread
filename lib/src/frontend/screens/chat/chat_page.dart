@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
-import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
 
 class ChatPage extends StatefulWidget {
   //Getting Data Variables
@@ -32,6 +32,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   //text Controller
   final TextEditingController _messageController = TextEditingController();
+  bool _showEmojiPicker = false;
 
   //getting chat and auth services
   final ChatService _chatService = ChatService();
@@ -40,17 +41,6 @@ class _ChatPageState extends State<ChatPage> {
   //for text feild focus
   FocusNode myFocusNode = FocusNode();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   myFocusNode.addListener(() {
-  //     if (myFocusNode.hasFocus) {
-  //       Future.delayed(const Duration(milliseconds: 500), () => scrollDown());
-  //     }
-  //   });
-
-  //   Future.delayed(const Duration(milliseconds: 500), () => scrollDown());
-  // }
   @override
   void initState() {
     super.initState();
@@ -63,6 +53,16 @@ class _ChatPageState extends State<ChatPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) => scrollDown());
   }
 
+  void toggleEmojiPicker() {
+    setState(() {
+      _showEmojiPicker = !_showEmojiPicker;
+    });
+  }
+
+  void onEmojiSelected(Category? category, Emoji emoji) {
+    _messageController.text += emoji.emoji;
+  }
+
   @override
   void dispose() {
     _messageController.dispose();
@@ -71,13 +71,7 @@ class _ChatPageState extends State<ChatPage> {
 
   //scroll controller
   final ScrollController _scrollController = ScrollController();
-  // void scrollDown() {
-  //   _scrollController.animateTo(
-  //     _scrollController.position.maxScrollExtent,
-  //     duration: const Duration(seconds: 1),
-  //     curve: Curves.fastOutSlowIn,
-  //   );
-  // }
+
   void scrollDown() {
     if (_scrollController.hasClients) {
       _scrollController.animateTo(
@@ -97,11 +91,9 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: Column(
         children: [
-          //displaying all chat information
           Expanded(
             child: _buildMessageList(),
           ),
-          //user input or inputing messaging
           _buildMessageInput(),
         ],
       ),
@@ -180,7 +172,6 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   //* Displaying Messsage in the UI
-//  Orginal Code : Version 01: without seen Message
   Widget _buildMessageItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     String message = data["message"];
@@ -276,35 +267,124 @@ class _ChatPageState extends State<ChatPage> {
 
   //* Sent Message Input
   Widget _buildMessageInput() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 25.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: MyTextFeild(
-              controller: _messageController,
-              hintText: "Type your Message",
-              obsuretext: false,
-              focusNode: myFocusNode,
-              icons: Icons.message_rounded,
-            ),
+    return Column(
+      children: [
+        if (_showEmojiPicker)
+          EmojiPicker(
+            onEmojiSelected: onEmojiSelected,
+            config: const Config(),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            margin: const EdgeInsets.only(right: 25),
-            child: IconButton(
-              onPressed: sendMessage,
-              icon: const Icon(
-                Icons.send_rounded,
-                color: Colors.white,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 25.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 14),
+                  child: TextField(
+                    controller: _messageController,
+                    focusNode: myFocusNode,
+                    obscureText: false,
+                    style: const TextStyle(fontSize: 16.0),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      fillColor: Theme.of(context).colorScheme.secondary,
+                      filled: true,
+                      hintText: "Type your Message",
+                      hintStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(_showEmojiPicker
+                            ? Icons.keyboard
+                            : Icons.emoji_emotions),
+                        onPressed: toggleEmojiPicker,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                margin: const EdgeInsets.only(right: 25),
+                child: IconButton(
+                  onPressed: sendMessage,
+                  icon: const Icon(
+                    Icons.send_rounded,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
+  // Widget _buildMessageInput() {
+  //   return Padding(
+  //     padding: const EdgeInsets.only(bottom: 25.0),
+  //     child: Row(
+  //       children: [
+  //         Expanded(
+  //           child: Padding(
+  //             padding: const EdgeInsets.only(left: 10.0, right: 14),
+  //             child: TextField(
+  //               controller: _messageController,
+  //               focusNode: myFocusNode,
+  //               obscureText: false,
+  //               style: const TextStyle(fontSize: 16.0),
+  //               decoration: InputDecoration(
+  //                 enabledBorder: OutlineInputBorder(
+  //                   borderSide: BorderSide(
+  //                     color: Theme.of(context).colorScheme.tertiary,
+  //                   ),
+  //                 ),
+  //                 focusedBorder: OutlineInputBorder(
+  //                   borderSide: BorderSide(
+  //                     color: Theme.of(context).colorScheme.primary,
+  //                   ),
+  //                 ),
+  //                 fillColor: Theme.of(context).colorScheme.secondary,
+  //                 filled: true,
+  //                 hintText: "Type your Message",
+  //                 hintStyle: TextStyle(
+  //                   color: Theme.of(context).colorScheme.primary,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //         Container(
+  //           decoration: BoxDecoration(
+  //             color: Colors.green,
+  //             borderRadius: BorderRadius.circular(50),
+  //           ),
+  //           margin: const EdgeInsets.only(right: 25),
+  //           child: IconButton(
+  //             onPressed: sendMessage,
+  //             icon: const Icon(
+  //               Icons.send_rounded,
+  //               color: Colors.white,
+  //               size: 30,
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
