@@ -29,15 +29,13 @@ class MyTextFeild extends StatelessWidget {
         controller: controller,
         focusNode: focusNode,
         keyboardType: isNumeric ? TextInputType.number : null,
-        style: TextStyle(fontSize: screenHeight * 0.02), // 2% of screen height
+        style: TextStyle(fontSize: screenHeight * 0.02),
         decoration: InputDecoration(
-            //this is the enable the Text Feild color and design
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Theme.of(context).colorScheme.tertiary,
               ),
             ),
-            // Focus style
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Theme.of(context).colorScheme.primary,

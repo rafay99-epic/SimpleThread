@@ -1,70 +1,42 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: library_private_types_in_public_api
 
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
-// import 'package:simplethread/src/frontend/screens/chat/show_user.dart';
+import 'package:simplethread/src/frontend/screens/chat/chat_page.dart';
 import 'package:simplethread/src/frontend/screens/errorAndLoading/empty_screen.dart';
 import 'package:simplethread/src/frontend/screens/errorAndLoading/error.dart';
 import 'package:simplethread/src/frontend/screens/errorAndLoading/loading.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
 import 'package:simplethread/src/frontend/widget/user_title.dart';
-import 'package:simplethread/src/frontend/screens/chat/chat_page.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class ShowUser extends StatefulWidget {
+  const ShowUser({super.key});
 
+  @override
+  _ShowUserState createState() => _ShowUserState();
+}
+
+class _ShowUserState extends State<ShowUser> {
   //chat and Auth Services
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(
-        title: 'Simple Thread',
-        backbutton: false,
+      appBar: MyAppBar(
+        title: "Contacts",
+        backbutton: true,
+        actionButtonEnabled: true,
+        actionButtonVisible: true,
+        actionButtonIcon: FontAwesomeIcons.search,
+        onActionButtonPressed: () => {},
       ),
       body: _buildUserList(),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.push(
-      //       context,
-      //       MaterialPageRoute(builder: (context) => const ShowUser()),
-      //     );
-      //   },
-      //   backgroundColor: Theme.of(context).colorScheme.background,
-      //   foregroundColor: Theme.of(context).colorScheme.primary,
-      //   child: const FaIcon(
-      //     FontAwesomeIcons.message,
-      //   ),
-      // ),
     );
   }
 
-  // Widget _buildUserList() {
-  //   return StreamBuilder<Set<Map<String, dynamic>>>(
-  //     stream: _chatService.getUserStreamMessage(),
-  //     builder: (context, snapshot) {
-  //       if (!snapshot.hasData) {
-  //         return const Center(child: CircularProgressIndicator());
-  //       }
-  //       if (snapshot.hasError) {
-  //         return Text('Error: ${snapshot.error}');
-  //       }
-  //       Set<Map<String, dynamic>> users = snapshot.data!;
-  //       if (users.isEmpty) {
-  //         return const Text('No users found');
-  //       }
-  //       return ListView.builder(
-  //         itemCount: users.length,
-  //         itemBuilder: (context, index) {
-  //           return _builderUserListItem(users.elementAt(index), context);
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
   Widget _buildUserList() {
     return StreamBuilder(
       stream: _chatService.getUserStream(),

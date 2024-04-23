@@ -67,7 +67,7 @@ class SettingPage extends StatelessWidget {
             buildListTile(
               Icons.contact_mail,
               Colors.blue,
-              'Contact US',
+              'Feedback',
               ContactPage(),
               context,
             ),

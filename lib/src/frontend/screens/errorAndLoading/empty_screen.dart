@@ -14,7 +14,7 @@ class NoDataFound extends StatelessWidget {
               left: 8.0, right: 8.0, top: 20.0, bottom: 20.0),
           child: Column(
             children: <Widget>[
-              const SizedBox(height: 10),
+              const SizedBox(height: 30),
               Lottie.asset('assets/animation/datanotfound.json'),
               const SizedBox(height: 10),
               Text(
