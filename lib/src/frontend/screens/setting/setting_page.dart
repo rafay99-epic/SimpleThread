@@ -57,12 +57,18 @@ class SettingPage extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20.0),
         child: ListView(
           children: <Widget>[
-            const ListTile(
-              leading: Icon(
-                Icons.dark_mode,
+            const Padding(
+              padding: EdgeInsets.only(left: 20.0, right: 15.0),
+              child: Text(
+                'About',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
-              title: DarkModeSwitch(),
-              horizontalTitleGap: -6.0,
+            ),
+            const SizedBox(
+              height: 10.0,
             ),
             buildListTile(
               Icons.contact_mail,
@@ -70,6 +76,47 @@ class SettingPage extends StatelessWidget {
               'Feedback',
               ContactPage(),
               context,
+            ),
+            buildListTile(
+              Icons.policy_sharp,
+              Colors.purple,
+              'Privacy Policy',
+              const PrivacyPolicyPage(),
+              context,
+            ),
+            //app version
+            ListTile(
+              leading: Icon(
+                Icons.info,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              title: Text(
+                'App Version',
+                style: GoogleFonts.roboto(
+                  textStyle: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+              subtitle:
+                  Text('2.0.0', style: TextStyle(color: Colors.grey[600])),
+            ),
+
+            const SizedBox(height: 10),
+            const Padding(
+              padding: EdgeInsets.only(left: 20.0, right: 15.0),
+              child: Text(
+                'App Setting',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            const ListTile(
+              leading: Icon(
+                Icons.dark_mode,
+              ),
+              title: DarkModeSwitch(),
+              horizontalTitleGap: -6.0,
             ),
             buildListTile(
               Icons.person_3_sharp,
@@ -83,13 +130,6 @@ class SettingPage extends StatelessWidget {
               Colors.red,
               'Delete Profile',
               DeleteProfile(),
-              context,
-            ),
-            buildListTile(
-              Icons.policy_sharp,
-              Colors.purple,
-              'Privacy Policy',
-              const PrivacyPolicyPage(),
               context,
             ),
             ListTile(
