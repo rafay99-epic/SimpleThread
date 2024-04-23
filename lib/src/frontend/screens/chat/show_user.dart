@@ -5,11 +5,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
 import 'package:simplethread/src/frontend/screens/chat/chat_page.dart';
-import 'package:simplethread/src/frontend/screens/errorAndLoading/empty_screen.dart';
-import 'package:simplethread/src/frontend/screens/errorAndLoading/error.dart';
-import 'package:simplethread/src/frontend/screens/errorAndLoading/loading.dart';
-import 'package:simplethread/src/frontend/widget/my_appbar.dart';
-import 'package:simplethread/src/frontend/widget/user_title.dart';
+import 'package:simplethread/src/constants/errorAndLoading/empty_screen.dart';
+import 'package:simplethread/src/constants/errorAndLoading/error.dart';
+import 'package:simplethread/src/constants/errorAndLoading/loading.dart';
+import 'package:simplethread/src/constants/widget/my_appbar.dart';
+import 'package:simplethread/src/constants/widget/user_title.dart';
 
 class ShowUser extends StatefulWidget {
   const ShowUser({super.key});

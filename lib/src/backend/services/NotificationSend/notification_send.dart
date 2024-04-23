@@ -3,8 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:simplethread/src/frontend/screens/errorAndLoading/error.dart';
-import 'package:simplethread/src/frontend/screens/errorAndLoading/loading.dart';
+import 'package:simplethread/src/constants/errorAndLoading/error.dart';
+import 'package:simplethread/src/constants/errorAndLoading/loading.dart';
 
 class MessageListener extends StatefulWidget {
   const MessageListener({super.key});

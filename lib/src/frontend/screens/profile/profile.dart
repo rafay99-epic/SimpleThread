@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:simplethread/src/backend/services/profile/profile_update.dart';
-import 'package:simplethread/src/frontend/screens/errorAndLoading/error_dialog.dart';
-import 'package:simplethread/src/frontend/widget/my_appbar.dart';
+import 'package:simplethread/src/constants/errorAndLoading/error_dialog.dart';
+import 'package:simplethread/src/constants/widget/my_appbar.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);

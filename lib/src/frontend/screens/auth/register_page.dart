@@ -6,10 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/frontend/screens/auth/verify_email.dart';
-import 'package:simplethread/src/frontend/screens/errorAndLoading/error_dialog.dart';
+import 'package:simplethread/src/constants/errorAndLoading/error_dialog.dart';
 
-import 'package:simplethread/src/frontend/widget/my_button.dart';
-import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
+import 'package:simplethread/src/constants/widget/my_button.dart';
+import 'package:simplethread/src/constants/widget/my_textfeild.dart';
 
 class RegisterPage extends StatelessWidget {
   //-----------------------

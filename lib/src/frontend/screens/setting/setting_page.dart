@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
-import 'package:simplethread/src/frontend/screens/setting/delete_account.dart';
-import 'package:simplethread/src/frontend/screens/setting/privacy.dart';
-import 'package:simplethread/src/frontend/widget/darkmodeswitch.dart';
-import 'package:simplethread/src/frontend/widget/my_appbar.dart';
-import 'package:simplethread/src/frontend/screens/setting/ProfileUpdate.dart';
-import 'package:simplethread/src/frontend/screens/setting/contact_page.dart';
+import 'package:simplethread/src/frontend/screens/setting/widgets/delete_account.dart';
+import 'package:simplethread/src/frontend/screens/setting/widgets/privacy.dart';
+import 'package:simplethread/src/constants/widget/darkmodeswitch.dart';
+import 'package:simplethread/src/constants/widget/my_appbar.dart';
+import 'package:simplethread/src/frontend/screens/setting/widgets/ProfileUpdate.dart';
+import 'package:simplethread/src/frontend/screens/setting/widgets/contact_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

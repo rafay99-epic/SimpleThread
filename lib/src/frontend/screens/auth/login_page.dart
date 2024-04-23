@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/frontend/screens/auth/verify_email.dart';
 import 'package:simplethread/src/frontend/screens/home/bottom_navbar.dart';
-import 'package:simplethread/src/frontend/widget/my_button.dart';
-import 'package:simplethread/src/frontend/widget/my_textfeild.dart';
+import 'package:simplethread/src/constants/widget/my_button.dart';
+import 'package:simplethread/src/constants/widget/my_textfeild.dart';
 
 // ignore: camel_case_types
 class login_page extends StatelessWidget {

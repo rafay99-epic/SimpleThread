@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
 import 'package:simplethread/src/frontend/screens/home/bottom_navbar.dart';
-import 'package:simplethread/src/frontend/widget/my_appbar.dart';
+import 'package:simplethread/src/constants/widget/my_appbar.dart';
 
 class VerifyEmail extends StatefulWidget {
   const VerifyEmail({super.key});

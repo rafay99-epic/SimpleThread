@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:simplethread/src/frontend/screens/errorAndLoading/loading.dart';
+import 'package:simplethread/src/constants/errorAndLoading/loading.dart';
 import 'package:simplethread/src/frontend/screens/home/splash_screen.dart';
 
 class CheckInternetPage extends StatefulWidget {

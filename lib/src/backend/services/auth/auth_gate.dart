@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
 import 'package:simplethread/src/frontend/screens/auth/verify_email.dart';
-import 'package:simplethread/src/frontend/screens/errorAndLoading/loading.dart';
+import 'package:simplethread/src/constants/errorAndLoading/loading.dart';
 import 'package:simplethread/src/frontend/screens/home/bottom_navbar.dart';
 
 //--------------------------------------------------
