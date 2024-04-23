@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
+import 'package:simplethread/src/frontend/screens/errorAndLoading/error.dart';
+import 'package:simplethread/src/frontend/screens/errorAndLoading/loading.dart';
 import 'package:simplethread/src/frontend/widget/my_appbar.dart';
 
 class ChatPage extends StatefulWidget {
@@ -13,9 +14,6 @@ class ChatPage extends StatefulWidget {
   final String receiverEmail;
   final String receiverID;
 
-  //*loader for chat
-  static const String _loader = "assets/animation/loader.json";
-  //*For Empty Chat Screen
   static const String _emptyChat = "assets/images/empty_chat.svg";
 
   // getting  functions
@@ -102,7 +100,6 @@ class _ChatPageState extends State<ChatPage> {
 
   //* sending a message function
   void sendMessage() async {
-    //if there is something inside the textfeild the textfeild then send it
     if (_messageController.text.isNotEmpty) {
       //send the message
       await _chatService.sendMessage(
@@ -122,20 +119,16 @@ class _ChatPageState extends State<ChatPage> {
       builder: (context, snapshot) {
         //* errors
         if (snapshot.hasError) {
-          return const Text("Error on chat Application");
+          return const SingleChildScrollView(
+            child: Center(
+              child: ErrorScreen(),
+            ),
+          );
         }
 
         //* loading
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: Lottie.asset(
-              ChatPage._loader,
-              width: 150,
-              height: 150,
-              repeat: true,
-              reverse: false,
-            ),
-          );
+          return const LoadingScreen();
         }
 
         //* return list view
@@ -195,15 +188,78 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  /* 
-   ! Noting Changing the Value into the datastore:
-   ! 1. Firebase is open. Need Acess Text Me. 
-   ! 2. The orginal Code is V1, Don't delete it.Just comment it Plz. 
-   ! 3. There are some values that I have commented out, in file chat_service.dart,
-   !    message.dart.
-   ! 4. Everything is the same. 
-   *                        Good Luck 
-  */
+  //* Sent Message Input
+  Widget _buildMessageInput() {
+    return Column(
+      children: [
+        if (_showEmojiPicker)
+          EmojiPicker(
+            onEmojiSelected: onEmojiSelected,
+            config: const Config(
+              height: 200,
+              swapCategoryAndBottomBar: true,
+            ),
+          ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 25.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 14),
+                  child: TextField(
+                    controller: _messageController,
+                    focusNode: myFocusNode,
+                    obscureText: false,
+                    style: const TextStyle(fontSize: 16.0),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      fillColor: Theme.of(context).colorScheme.secondary,
+                      filled: true,
+                      hintText: "Type your Message",
+                      hintStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(_showEmojiPicker
+                            ? Icons.keyboard
+                            : Icons.emoji_emotions),
+                        onPressed: toggleEmojiPicker,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                margin: const EdgeInsets.only(right: 25),
+                child: IconButton(
+                  onPressed: sendMessage,
+                  icon: const Icon(
+                    Icons.send_rounded,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
   // Version 04: Chaging the value into the database
 
@@ -260,129 +316,6 @@ class _ChatPageState extends State<ChatPage> {
   //               size: 12.0,
   //             ),
   //           ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  //* Sent Message Input
-  Widget _buildMessageInput() {
-    return Column(
-      children: [
-        if (_showEmojiPicker)
-          EmojiPicker(
-            onEmojiSelected: onEmojiSelected,
-            config: const Config(),
-          ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 25.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 14),
-                  child: TextField(
-                    controller: _messageController,
-                    focusNode: myFocusNode,
-                    obscureText: false,
-                    style: const TextStyle(fontSize: 16.0),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      fillColor: Theme.of(context).colorScheme.secondary,
-                      filled: true,
-                      hintText: "Type your Message",
-                      hintStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(_showEmojiPicker
-                            ? Icons.keyboard
-                            : Icons.emoji_emotions),
-                        onPressed: toggleEmojiPicker,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                margin: const EdgeInsets.only(right: 25),
-                child: IconButton(
-                  onPressed: sendMessage,
-                  icon: const Icon(
-                    Icons.send_rounded,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-  // Widget _buildMessageInput() {
-  //   return Padding(
-  //     padding: const EdgeInsets.only(bottom: 25.0),
-  //     child: Row(
-  //       children: [
-  //         Expanded(
-  //           child: Padding(
-  //             padding: const EdgeInsets.only(left: 10.0, right: 14),
-  //             child: TextField(
-  //               controller: _messageController,
-  //               focusNode: myFocusNode,
-  //               obscureText: false,
-  //               style: const TextStyle(fontSize: 16.0),
-  //               decoration: InputDecoration(
-  //                 enabledBorder: OutlineInputBorder(
-  //                   borderSide: BorderSide(
-  //                     color: Theme.of(context).colorScheme.tertiary,
-  //                   ),
-  //                 ),
-  //                 focusedBorder: OutlineInputBorder(
-  //                   borderSide: BorderSide(
-  //                     color: Theme.of(context).colorScheme.primary,
-  //                   ),
-  //                 ),
-  //                 fillColor: Theme.of(context).colorScheme.secondary,
-  //                 filled: true,
-  //                 hintText: "Type your Message",
-  //                 hintStyle: TextStyle(
-  //                   color: Theme.of(context).colorScheme.primary,
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //         Container(
-  //           decoration: BoxDecoration(
-  //             color: Colors.green,
-  //             borderRadius: BorderRadius.circular(50),
-  //           ),
-  //           margin: const EdgeInsets.only(right: 25),
-  //           child: IconButton(
-  //             onPressed: sendMessage,
-  //             icon: const Icon(
-  //               Icons.send_rounded,
-  //               color: Colors.white,
-  //               size: 30,
-  //             ),
-  //           ),
-  //         ),
   //       ],
   //     ),
   //   );
