@@ -27,7 +27,7 @@ class ProfileService {
   //----------------------------------
 
   Future<void> updateUserData(String userId, String email, String name,
-      String phoneNumber, String password) async {
+      String phoneNumber, String password, String photoUrl) async {
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null && user.email != email) {
@@ -37,7 +37,7 @@ class ProfileService {
       await _sendVerificationEmail(user);
     }
 
-    return _updateFirestore(userId, email, name, phoneNumber);
+    return _updateFirestore(userId, email, name, phoneNumber, photoUrl);
   }
 
   //----------------------------------
@@ -87,12 +87,13 @@ class ProfileService {
   //  Update Data in Firestore
   //----------------------------------
 
-  Future<void> _updateFirestore(
-      String userId, String email, String name, String phoneNumber) {
+  Future<void> _updateFirestore(String userId, String email, String name,
+      String phoneNumber, String photoUrl) {
     return _firestore.collection('Users').doc(userId).update({
       'email': email,
       'name': name,
       'phoneNumber': phoneNumber,
+      'photoUrl': photoUrl
     });
   }
 }

@@ -26,8 +26,10 @@ class SsplasScreenhState extends State<SplashScreen> {
   void initState() {
     super.initState();
     notificationPermission.requestNotificationPermissions();
-    permissionsService.requestStoragePermission();
-    permissionsService.requestPhotosPermission();
+    // Future.wait([
+    //   permissionsService.requestStoragePermission(),
+    //   permissionsService.requestPhotosPermission(),
+    // ]);
     const MessageListener();
     Timer(const Duration(seconds: 4), () {
       Navigator.pushReplacement(

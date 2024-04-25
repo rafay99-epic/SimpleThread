@@ -1,8 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, file_names
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,7 +35,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   ImageProvider _image = const AssetImage("assets/images/user.png");
   final ImagePicker _picker = ImagePicker();
   String firebaseImageUrl = "";
-
+  String profilePhotoUrl = "";
   //----------------------------------
   //  init Function
   //----------------------------------
@@ -102,6 +104,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
     emailController.text = data['email'] as String;
     phoneNumberController.text = data['phoneNumber'] as String;
     nameController.text = data['name'] as String;
+    profilePhotoUrl = data['photoUrl'];
   }
 
   //----------------------------------
@@ -180,6 +183,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
         nameController.text,
         phoneNumberController.text,
         password,
+        profilePhotoUrl,
       );
       _showSnackBar('Profile Updated Successfully');
     } catch (e) {
@@ -272,6 +276,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   //------------------------------
   //  Image Picker
   //------------------------------
+
   Future<void> _pickImage() async {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
@@ -279,6 +284,25 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       setState(() {
         _image = FileImage(File(pickedFile.path));
       });
+
+      // Encode the email address
+      final email = emailController.text;
+      final encodedEmail = base64Url.encode(utf8.encode(email));
+
+      // Upload the picked image to Firebase Storage
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('profile_pictures')
+          .child(encodedEmail);
+      try {
+        await ref.putFile(File(pickedFile.path));
+      } catch (e) {
+        print('Upload failed with error: $e');
+      }
+
+      // Download the URL of the uploaded image
+      profilePhotoUrl = await ref.getDownloadURL();
+      print('Download URL: $profilePhotoUrl');
     }
   }
 
@@ -364,6 +388,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                 children: [
                   ElevatedButton(
                     onPressed: () => updateProfile(),
+                    // onPressed: () => testFirebaseStorage(),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.background,
                       padding: const EdgeInsets.symmetric(

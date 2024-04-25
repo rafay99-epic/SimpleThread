@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:simplethread/src/backend/services/profile/profile_update.dart';
 import 'package:simplethread/src/constants/errorAndLoading/error_dialog.dart';
 import 'package:simplethread/src/constants/widget/my_appbar.dart';
