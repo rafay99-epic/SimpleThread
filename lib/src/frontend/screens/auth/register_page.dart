@@ -229,6 +229,7 @@ class RegisterPage extends StatelessWidget {
         _passwordController.text,
         _nameController.text,
         _phoneNumberController.text,
+        "",
       );
 
       Navigator.of(context).pushReplacement(

@@ -3,8 +3,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-
 import 'package:simplethread/src/backend/services/profile/profile_update.dart';
 import 'package:simplethread/src/constants/errorAndLoading/error_dialog.dart';
 import 'package:simplethread/src/constants/widget/my_appbar.dart';
@@ -114,23 +112,27 @@ class _ProfileState extends State<Profile> {
   }
 
   void _handleNoUserDataError() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          "Your Data Does not Exist, Please Create an account",
-          style: GoogleFonts.roboto(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.primary,
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            "Your Data Does not Exist, Please Create an account",
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   void _handleUnknownError(error) {
-    showErrorDialog(context, error, "Error");
-    // Handle any errors
+    if (mounted) {
+      showErrorDialog(context, error, "Error");
+      // Handle any errors
+    }
   }
 
   Widget buildField(
@@ -173,6 +175,7 @@ class _ProfileState extends State<Profile> {
   //----------------------------------
   @override
   Widget build(BuildContext context) {
+    String firebaseImageUrl = "";
     return Scaffold(
       appBar: const MyAppBar(title: "Profile"),
       body: SingleChildScrollView(
@@ -185,11 +188,19 @@ class _ProfileState extends State<Profile> {
           child: Column(
             children: [
               //Profile Image
+              const SizedBox(height: 30),
               Container(
-                child: Lottie.asset(
-                  'assets/animation/user.json',
-                  width: 150,
-                  height: 150,
+                height: 150,
+                width: 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: (firebaseImageUrl.isEmpty)
+                        ? const AssetImage("assets/images/user.png")
+                            as ImageProvider
+                        : NetworkImage(firebaseImageUrl),
+                  ),
                 ),
               ),
               const SizedBox(height: 40),

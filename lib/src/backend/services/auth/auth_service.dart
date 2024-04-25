@@ -42,6 +42,7 @@ class AuthService {
     String password,
     String name,
     String phoneNumber,
+    String photourl,
   ) async {
     try {
       UserCredential userCredential =
@@ -57,6 +58,7 @@ class AuthService {
         'email': email,
         'name': name,
         'phoneNumber': phoneNumber,
+        'photoUrl': photourl,
       });
 
       return userCredential;

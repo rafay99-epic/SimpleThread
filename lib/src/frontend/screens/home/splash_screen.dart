@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:simplethread/src/backend/permissions/notification.dart';
+import 'package:simplethread/src/backend/permissions/storage.dart';
 import 'package:simplethread/src/backend/services/NotificationSend/notification_send.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_gate.dart';
@@ -19,11 +20,14 @@ class SplashScreen extends StatefulWidget {
 
 class SsplasScreenhState extends State<SplashScreen> {
   NotificationPermission notificationPermission = NotificationPermission();
+  StoragePermissionService permissionsService = StoragePermissionService();
 
   @override
   void initState() {
     super.initState();
     notificationPermission.requestNotificationPermissions();
+    permissionsService.requestStoragePermission();
+    permissionsService.requestPhotosPermission();
     const MessageListener();
     Timer(const Duration(seconds: 4), () {
       Navigator.pushReplacement(

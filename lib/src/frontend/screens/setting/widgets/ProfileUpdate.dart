@@ -1,10 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, file_names
 
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:simplethread/src/backend/services/profile/profile_update.dart';
 import 'package:simplethread/src/constants/widget/customtextfeild2.dart';
 import 'package:simplethread/src/constants/widget/my_appbar.dart';
@@ -27,11 +28,21 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   ProfileService profileService = ProfileService();
 
   //----------------------------------
+  //Image Upload
+  //----------------------------------
+  ImageProvider _image = const AssetImage("assets/images/user.png");
+  final ImagePicker _picker = ImagePicker();
+  String firebaseImageUrl = "";
+
+  //----------------------------------
   //  init Function
   //----------------------------------
   @override
   void initState() {
     super.initState();
+    if (firebaseImageUrl.isNotEmpty) {
+      _image = NetworkImage(firebaseImageUrl);
+    }
     loadUserData();
   }
 
@@ -258,6 +269,19 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
     );
   }
 
+  //------------------------------
+  //  Image Picker
+  //------------------------------
+  Future<void> _pickImage() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = FileImage(File(pickedFile.path));
+      });
+    }
+  }
+
   //----------------------------------
   //  Build Function
   //----------------------------------
@@ -274,11 +298,33 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
           ),
           child: Column(
             children: [
-              Container(
-                child: Lottie.asset(
-                  'assets/animation/user.json',
-                  width: 150,
+              GestureDetector(
+                onTap: _pickImage,
+                child: SizedBox(
                   height: 150,
+                  width: 150,
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: _image,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 8,
+                        right: 8,
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: Theme.of(context).colorScheme.primary,
+                          size: 30,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Text(
