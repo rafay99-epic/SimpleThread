@@ -86,6 +86,7 @@ class _ShowUserState extends State<ShowUser> {
               pageBuilder: (context, animation, secondaryAnimation) => ChatPage(
                 receiverEmail: userData["name"],
                 receiverID: userData["uid"],
+                profileImage: userData["photoUrl"],
               ),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {

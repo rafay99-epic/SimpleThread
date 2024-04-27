@@ -7,12 +7,12 @@ import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/chat/chat_service.dart';
 import 'package:simplethread/src/constants/errorAndLoading/error.dart';
 import 'package:simplethread/src/constants/errorAndLoading/loading.dart';
-import 'package:simplethread/src/constants/widget/my_appbar.dart';
 
 class ChatPage extends StatefulWidget {
   //Getting Data Variables
   final String receiverEmail;
   final String receiverID;
+  final String profileImage;
 
   static const String _emptyChat = "assets/images/empty_chat.svg";
 
@@ -21,6 +21,7 @@ class ChatPage extends StatefulWidget {
     super.key,
     required this.receiverID,
     required this.receiverEmail,
+    required this.profileImage,
   });
 
   @override
@@ -84,8 +85,25 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(
-        title: (widget.receiverEmail),
+      appBar: AppBar(
+        title: Text(
+          widget.receiverEmail,
+          style: TextStyle(
+            letterSpacing: .5,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: CircleAvatar(
+            backgroundImage: (widget.profileImage.isEmpty)
+                ? const AssetImage("assets/images/user.png") as ImageProvider
+                : NetworkImage(widget.profileImage),
+          ),
+        ),
       ),
       body: Column(
         children: [

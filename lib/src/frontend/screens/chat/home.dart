@@ -115,6 +115,7 @@ class HomePage extends StatelessWidget {
               pageBuilder: (context, animation, secondaryAnimation) => ChatPage(
                 receiverEmail: userData["name"],
                 receiverID: userData["uid"],
+                profileImage: userData["photoUrl"],
               ),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
