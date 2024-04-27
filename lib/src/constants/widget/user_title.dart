@@ -6,8 +6,10 @@ class UserTile extends StatelessWidget {
     super.key,
     required this.text,
     this.onTap,
+    this.profileImageURL,
   });
   final String text;
+  final String? profileImageURL;
   final void Function()? onTap;
 
   @override
@@ -23,19 +25,21 @@ class UserTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         margin: EdgeInsets.symmetric(
-          vertical: screenWidth * 0.03,
+          vertical: screenWidth * 0.02,
           horizontal: screenWidth * 0.04,
         ),
-        padding: EdgeInsets.all(screenWidth * 0.05),
+        padding: EdgeInsets.all(screenWidth * 0.03),
         child: Row(
           children: [
-            //icon
-            const Icon(Icons.person_rounded),
-            // adding Space
+            CircleAvatar(
+              radius: 30,
+              backgroundImage: profileImageURL != null
+                  ? NetworkImage(profileImageURL!) as ImageProvider
+                  : const AssetImage('assets/images/user.png'),
+            ),
             SizedBox(
               width: iconSpacing,
             ),
-            //username
             Text(
               text,
               style: GoogleFonts.roboto(
