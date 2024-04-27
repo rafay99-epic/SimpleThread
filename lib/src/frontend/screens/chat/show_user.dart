@@ -79,6 +79,7 @@ class _ShowUserState extends State<ShowUser> {
     if (userData["email"] != _authService.getcurrentUser()!.email) {
       return UserTile(
         text: userData['name'],
+        profileImageURL: userData['photoUrl'],
         onTap: () {
           Navigator.push(
             context,

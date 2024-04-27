@@ -6,10 +6,10 @@ class UserTile extends StatelessWidget {
     super.key,
     required this.text,
     this.onTap,
-    this.profileImageURL,
+    required this.profileImageURL,
   });
   final String text;
-  final String? profileImageURL;
+  final String profileImageURL;
   final void Function()? onTap;
 
   @override
@@ -33,9 +33,9 @@ class UserTile extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 30,
-              backgroundImage: profileImageURL != null
-                  ? NetworkImage(profileImageURL!) as ImageProvider
-                  : const AssetImage('assets/images/user.png'),
+              backgroundImage: (profileImageURL.isEmpty)
+                  ? const AssetImage('assets/images/user.png') as ImageProvider
+                  : NetworkImage(profileImageURL),
             ),
             SizedBox(
               width: iconSpacing,
