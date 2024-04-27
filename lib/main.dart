@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+// import 'package:in_app_update/in_app_update.dart';
 import 'package:simplethread/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:simplethread/src/frontend/screens/internet_check/check_internet_page.dart';
@@ -11,7 +12,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  // await InAppUpdate.checkForUpdate();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),

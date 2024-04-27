@@ -140,6 +140,13 @@ class SettingPage extends StatelessWidget {
               ChangePassword(),
               context,
             ),
+            buildListTile(
+              Icons.update,
+              Colors.cyan,
+              'App Update',
+              ChangePassword(),
+              context,
+            ),
             ListTile(
               title: Row(
                 children: <Widget>[
