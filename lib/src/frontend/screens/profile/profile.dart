@@ -24,7 +24,7 @@ class _ProfileState extends State<Profile> {
   final nameController = TextEditingController();
   final passwordController = TextEditingController();
   ProfileService profileService = ProfileService();
-
+  String firebaseImageUrl = "";
   //----------------------------------
   //  init Function
   //----------------------------------
@@ -91,6 +91,7 @@ class _ProfileState extends State<Profile> {
       emailController.text = data['email'] as String;
       phoneNumberController.text = data['phoneNumber'] as String;
       nameController.text = data['name'] as String;
+      firebaseImageUrl = data['photoUrl'];
     });
   }
 
@@ -176,7 +177,6 @@ class _ProfileState extends State<Profile> {
   //----------------------------------
   @override
   Widget build(BuildContext context) {
-    String firebaseImageUrl = "";
     return Scaffold(
       appBar: const MyAppBar(title: "Profile"),
       body: SingleChildScrollView(

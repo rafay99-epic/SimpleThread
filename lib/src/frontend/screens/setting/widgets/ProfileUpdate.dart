@@ -42,9 +42,6 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   @override
   void initState() {
     super.initState();
-    if (firebaseImageUrl.isNotEmpty) {
-      _image = NetworkImage(firebaseImageUrl);
-    }
     loadUserData();
   }
 
@@ -104,7 +101,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
     emailController.text = data['email'] as String;
     phoneNumberController.text = data['phoneNumber'] as String;
     nameController.text = data['name'] as String;
-    profilePhotoUrl = data['photoUrl'];
+    firebaseImageUrl = data['photoUrl'];
   }
 
   //----------------------------------
@@ -285,11 +282,9 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
         _image = FileImage(File(pickedFile.path));
       });
 
-      // Encode the email address
       final email = emailController.text;
       final encodedEmail = base64Url.encode(utf8.encode(email));
 
-      // Upload the picked image to Firebase Storage
       final ref = FirebaseStorage.instance
           .ref()
           .child('profile_pictures')
@@ -297,12 +292,9 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       try {
         await ref.putFile(File(pickedFile.path));
       } catch (e) {
-        print('Upload failed with error: $e');
+        _showErrorDialog("Profile Image is not Uploaded: Error: $e");
       }
-
-      // Download the URL of the uploaded image
       profilePhotoUrl = await ref.getDownloadURL();
-      print('Download URL: $profilePhotoUrl');
     }
   }
 
@@ -334,13 +326,17 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: _image,
+                            // image: _image,
+                            image: (firebaseImageUrl.isEmpty)
+                                ? _image
+                                : NetworkImage(firebaseImageUrl)
+                                    as ImageProvider,
                           ),
                         ),
                       ),
                       Positioned(
-                        bottom: 8,
-                        right: 8,
+                        bottom: 1,
+                        right: 1,
                         child: Icon(
                           Icons.camera_alt,
                           color: Theme.of(context).colorScheme.primary,
@@ -388,7 +384,6 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                 children: [
                   ElevatedButton(
                     onPressed: () => updateProfile(),
-                    // onPressed: () => testFirebaseStorage(),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.background,
                       padding: const EdgeInsets.symmetric(
