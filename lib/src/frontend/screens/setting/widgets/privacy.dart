@@ -10,6 +10,7 @@ class PrivacyPolicyPage extends StatelessWidget {
     return Scaffold(
       appBar: const MyAppBar(
         title: 'Privacy Policy',
+        backbutton: true,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(
@@ -19,14 +20,6 @@ class PrivacyPolicyPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Privacy Policy',
-              textAlign: TextAlign.justify,
-              style: GoogleFonts.roboto(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
             const SizedBox(height: 10.0),
             Text(
               textAlign: TextAlign.justify,

@@ -20,7 +20,10 @@ class DeleteProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(title: "Delete Account"),
+      appBar: const MyAppBar(
+        title: "Delete Account",
+        backbutton: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(

@@ -1,6 +1,5 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, file_names
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -192,8 +191,8 @@ class _ProfileState extends State<Profile> {
               //Profile Image
               const SizedBox(height: 30),
               Container(
-                height: 150,
-                width: 150,
+                height: 200,
+                width: 200,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
@@ -201,7 +200,7 @@ class _ProfileState extends State<Profile> {
                     image: (firebaseImageUrl.isEmpty)
                         ? const AssetImage("assets/images/user.png")
                             as ImageProvider
-                        : CachedNetworkImageProvider(firebaseImageUrl),
+                        : NetworkImage(firebaseImageUrl),
                   ),
                 ),
               ),

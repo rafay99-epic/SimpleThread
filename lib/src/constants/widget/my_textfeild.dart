@@ -7,11 +7,13 @@ class MyTextFeild extends StatelessWidget {
   final IconData? icons;
   final FocusNode? focusNode;
   final bool isNumeric;
+  final bool isEnabled;
   const MyTextFeild({
     super.key,
     required this.hintText,
     required this.obsuretext,
     required this.controller,
+    this.isEnabled = true,
     this.icons,
     this.focusNode,
     this.isNumeric = false,
@@ -27,6 +29,7 @@ class MyTextFeild extends StatelessWidget {
       child: TextField(
         obscureText: obsuretext,
         controller: controller,
+        enabled: isEnabled,
         focusNode: focusNode,
         keyboardType: isNumeric ? TextInputType.number : null,
         style: TextStyle(fontSize: screenHeight * 0.02),

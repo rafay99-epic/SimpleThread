@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/backend/services/contactMessage/contactMessage.dart';
@@ -70,7 +71,10 @@ class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(title: "Contact US"),
+      appBar: const MyAppBar(
+        title: "Feedback",
+        backbutton: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(

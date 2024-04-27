@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -305,7 +304,10 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(title: "Update Profile"),
+      appBar: const MyAppBar(
+        title: "Update Profile",
+        backbutton: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
@@ -330,7 +332,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                             // image: _image,
                             image: (firebaseImageUrl.isEmpty)
                                 ? _image
-                                : CachedNetworkImageProvider(firebaseImageUrl)
+                                : NetworkImage(firebaseImageUrl)
                                     as ImageProvider,
                           ),
                         ),
