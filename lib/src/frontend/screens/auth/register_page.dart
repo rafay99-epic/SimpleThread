@@ -8,8 +8,8 @@ import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/frontend/screens/auth/verify_email.dart';
 import 'package:simplethread/src/constants/errorAndLoading/error_dialog.dart';
 
-import 'package:simplethread/src/constants/widget/my_button.dart';
-import 'package:simplethread/src/constants/widget/my_textfeild.dart';
+import 'package:simplethread/src/constants/widget/buttons/my_button.dart';
+import 'package:simplethread/src/constants/widget/textfeild/my_textfeild.dart';
 
 class RegisterPage extends StatelessWidget {
   //-----------------------

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/backend/services/contactMessage/contactMessage.dart';
-import 'package:simplethread/src/constants/widget/customtextfeild2.dart';
-import 'package:simplethread/src/constants/widget/my_appbar.dart';
+import 'package:simplethread/src/constants/widget/textfeild/customtextfeild2.dart';
+import 'package:simplethread/src/constants/widget/appbar/my_appbar.dart';
 
 class ContactPage extends StatelessWidget {
   ContactPage({super.key});

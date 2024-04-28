@@ -7,14 +7,18 @@ import 'package:simplethread/src/backend/services/chat/chat_service.dart';
 import 'package:simplethread/src/constants/errorAndLoading/empty_screen.dart';
 import 'package:simplethread/src/constants/errorAndLoading/error.dart';
 import 'package:simplethread/src/constants/errorAndLoading/loading.dart';
-import 'package:simplethread/src/constants/widget/my_appbar.dart';
-import 'package:simplethread/src/constants/widget/user_title.dart';
+import 'package:simplethread/src/constants/widget/appbar/my_appbar.dart';
+import 'package:simplethread/src/constants/widget/title/user_title.dart';
 import 'package:simplethread/src/frontend/screens/chat/chat_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
 
-  //chat and Auth Services
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
 
@@ -43,28 +47,6 @@ class HomePage extends StatelessWidget {
   }
 
   // Widget _buildUserList() {
-  //   return StreamBuilder<Set<Map<String, dynamic>>>(
-  //     stream: _chatService.getUserStreamMessage(),
-  //     builder: (context, snapshot) {
-  //       if (!snapshot.hasData) {
-  //         return const Center(child: CircularProgressIndicator());
-  //       }
-  //       if (snapshot.hasError) {
-  //         return Text('Error: ${snapshot.error}');
-  //       }
-  //       Set<Map<String, dynamic>> users = snapshot.data!;
-  //       if (users.isEmpty) {
-  //         return const Text('No users found');
-  //       }
-  //       return ListView.builder(
-  //         itemCount: users.length,
-  //         itemBuilder: (context, index) {
-  //           return _builderUserListItem(users.elementAt(index), context);
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
   Widget _buildUserList() {
     return StreamBuilder(
       stream: _chatService.getUserStream(),

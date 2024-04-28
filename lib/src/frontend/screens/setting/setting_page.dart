@@ -6,8 +6,8 @@ import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
 import 'package:simplethread/src/frontend/screens/setting/widgets/change_password.dart';
 import 'package:simplethread/src/frontend/screens/setting/widgets/delete_account.dart';
 import 'package:simplethread/src/frontend/screens/setting/widgets/privacy.dart';
-import 'package:simplethread/src/constants/widget/darkmodeswitch.dart';
-import 'package:simplethread/src/constants/widget/my_appbar.dart';
+import 'package:simplethread/src/constants/widget/buttons/darkmodeswitch.dart';
+import 'package:simplethread/src/constants/widget/appbar/my_appbar.dart';
 import 'package:simplethread/src/frontend/screens/setting/widgets/ProfileUpdate.dart';
 import 'package:simplethread/src/frontend/screens/setting/widgets/contact_page.dart';
 

@@ -8,8 +8,8 @@ import 'package:simplethread/src/frontend/screens/chat/chat_page.dart';
 import 'package:simplethread/src/constants/errorAndLoading/empty_screen.dart';
 import 'package:simplethread/src/constants/errorAndLoading/error.dart';
 import 'package:simplethread/src/constants/errorAndLoading/loading.dart';
-import 'package:simplethread/src/constants/widget/my_appbar.dart';
-import 'package:simplethread/src/constants/widget/user_title.dart';
+import 'package:simplethread/src/constants/widget/appbar/my_appbar.dart';
+import 'package:simplethread/src/constants/widget/title/user_title.dart';
 
 class ShowUser extends StatefulWidget {
   const ShowUser({super.key});

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/backend/services/delete/delete.dart';
-import 'package:simplethread/src/constants/widget/my_appbar.dart';
+import 'package:simplethread/src/constants/widget/appbar/my_appbar.dart';
 
 //------------------------------------
 //  Delete User Auth and Data Screen
