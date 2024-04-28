@@ -65,9 +65,6 @@ class ChangePassword extends StatelessWidget {
   Widget lottieAnimationFunction(BuildContext context) {
     return Lottie.asset(
       lottieAnimation.changePassword,
-      // width: 200,
-      // height: 200,
-      // fit: BoxFit.fill,
     );
   }
 

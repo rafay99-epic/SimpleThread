@@ -1,8 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:in_app_update/in_app_update.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
+import 'package:simplethread/src/constants/widget/listTitle/list_tile.dart';
 import 'package:simplethread/src/frontend/screens/setting/widgets/change_password.dart';
 import 'package:simplethread/src/frontend/screens/setting/widgets/delete_account.dart';
 import 'package:simplethread/src/frontend/screens/setting/widgets/privacy.dart';
@@ -13,39 +18,6 @@ import 'package:simplethread/src/frontend/screens/setting/widgets/contact_page.d
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
-
-  ListTile buildListTile(IconData icon, Color color, String text, Widget page,
-      BuildContext context) {
-    return ListTile(
-      title: Row(
-        children: <Widget>[
-          Icon(
-            icon,
-            color: color,
-          ),
-          const SizedBox(
-            width: 8.0,
-          ),
-          Text(
-            text,
-            style: GoogleFonts.roboto(
-              textStyle: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-        ],
-      ),
-      onTap: () {
-        Navigator.push(
-          context,
-          PageTransition(
-            type: PageTransitionType.rightToLeftWithFade,
-            child: page,
-            duration: const Duration(milliseconds: 200),
-          ),
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,12 +112,66 @@ class SettingPage extends StatelessWidget {
               ChangePassword(),
               context,
             ),
-            buildListTile(
-              Icons.update,
-              Colors.cyan,
-              'App Update',
-              ChangePassword(),
-              context,
+            ListTile(
+              title: Row(
+                children: <Widget>[
+                  const Icon(
+                    Icons.update,
+                    color: Colors.cyan,
+                  ),
+                  const SizedBox(
+                    width: 8.0,
+                  ),
+                  Text(
+                    'App Update',
+                    style: GoogleFonts.roboto(
+                      textStyle: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () async {
+                //update Application
+
+                try {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Checking for updates...'),
+                      content: LoadingAnimationWidget.staggeredDotsWave(
+                        color: Theme.of(context).colorScheme.primary,
+                        size: 130,
+                      ),
+                    ),
+                  );
+                  final AppUpdateInfo updateInfo =
+                      await InAppUpdate.checkForUpdate();
+                  Navigator.pop(context);
+                  if (updateInfo.updateAvailability ==
+                      UpdateAvailability.updateAvailable) {
+                    await InAppUpdate.startFlexibleUpdate();
+                    await InAppUpdate.completeFlexibleUpdate();
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const AlertDialog(
+                        title: Text('No updates available'),
+                      ),
+                    );
+                  }
+                } on PlatformException catch (e) {
+                  if (e.code == 'TASK_FAILURE') {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const AlertDialog(
+                        title: Text('Update failed'),
+                        content: Text(
+                            'The update could not be installed due to the current device state.'),
+                      ),
+                    );
+                  }
+                }
+              },
             ),
             ListTile(
               title: Row(
