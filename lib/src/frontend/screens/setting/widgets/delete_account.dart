@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/backend/services/delete/delete.dart';
+import 'package:simplethread/src/constants/animation/lottie_animation.dart';
 import 'package:simplethread/src/constants/widget/appbar/my_appbar.dart';
 
 //------------------------------------
@@ -13,6 +14,7 @@ class DeleteProfile extends StatelessWidget {
   DeleteProfile({super.key});
 
   final delete_data = DeleteDataProfile();
+  final LottieAnimation lottieAnimation = LottieAnimation();
 
   //----------------------------------
   //  Main Build Widget
@@ -35,7 +37,7 @@ class DeleteProfile extends StatelessWidget {
             children: [
               Container(
                 child: Lottie.asset(
-                  'assets/animation/delete.json',
+                  lottieAnimation.deletePage,
                   width: 150,
                   height: 150,
                 ),

@@ -2,9 +2,11 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:simplethread/src/backend/services/auth/auth_service.dart';
 import 'package:simplethread/src/backend/services/auth/login_or_register.dart';
+import 'package:simplethread/src/constants/animation/lottie_animation.dart';
 import 'package:simplethread/src/constants/errorAndLoading/error_dialog.dart';
 import 'package:simplethread/src/constants/errorAndLoading/snakbar.dart';
 import 'package:simplethread/src/constants/widget/appbar/my_appbar.dart';
@@ -12,11 +14,10 @@ import 'package:simplethread/src/constants/widget/buttons/my_button.dart';
 import 'package:simplethread/src/constants/widget/textfeild/my_textfeild.dart';
 
 class ChangePassword extends StatelessWidget {
-  //-----------------------
-  // Controllers & actions
-  //-----------------------
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
+  final LottieAnimation lottieAnimation = LottieAnimation();
+  final authService = AuthService();
   String userEmail = "";
 
   snakbar snakebar = snakbar();
@@ -38,60 +39,35 @@ class ChangePassword extends StatelessWidget {
         backbutton: true,
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Center(
-        child: SingleChildScrollView(
-          //-----------------------
-          // Forget Password Form
-          //-----------------------
-          child: _buildForgotPasswordForm(context),
-        ),
+      body: SingleChildScrollView(
+        child: buildChangePasswordForm(context),
       ),
     );
   }
 
-  //------------------------------
-  // Forget Password Form Widget
-  //------------------------------
-  Column _buildForgotPasswordForm(BuildContext context) {
+  Column buildChangePasswordForm(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        //-----------------------
-        // Intro Text
-        //-----------------------
-        _buildIntroText(context),
+        const SizedBox(height: 40),
+        lottieAnimationFunction(context),
         const SizedBox(height: 10),
-        //-----------------------
-        // Instruction Message
-        //-----------------------
         _buildInstructionMessage(context),
         const SizedBox(height: 25),
-        //-----------------------
-        // Email TextFeild
-        //-----------------------
         _buildEmailTextField(),
         const SizedBox(height: 10),
-        //-----------------------
-        // Send Email Button
-        //-----------------------
         _buildSendEmailButton(context),
         const SizedBox(height: 10),
       ],
     );
   }
 
-  //-----------------------
-  // Form Components
-  //-----------------------
-  Text _buildIntroText(BuildContext context) {
-    return Text(
-      'Change Password',
-      style: TextStyle(
-        letterSpacing: .5,
-        fontSize: 42,
-        fontWeight: FontWeight.bold,
-        color: Theme.of(context).colorScheme.primary,
-      ),
+  Widget lottieAnimationFunction(BuildContext context) {
+    return Lottie.asset(
+      lottieAnimation.changePassword,
+      // width: 200,
+      // height: 200,
+      // fit: BoxFit.fill,
     );
   }
 
@@ -122,11 +98,7 @@ class ChangePassword extends StatelessWidget {
     );
   }
 
-  //-----------------------------
-  // Future Function for forget
-  //-----------------------------
   Future<void> _changePassword(BuildContext context) async {
-    final authService = AuthService();
     if (_emailController.text.isNotEmpty) {
       try {
         await authService.sendPasswordResetEmail(_emailController.text);

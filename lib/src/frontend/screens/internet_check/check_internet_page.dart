@@ -2,10 +2,13 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:lottie/lottie.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:simplethread/src/constants/animation/lottie_animation.dart';
 import 'package:simplethread/src/constants/errorAndLoading/loading.dart';
 import 'package:simplethread/src/frontend/screens/home/splash_screen.dart';
+import 'package:simplethread/src/frontend/screens/update/update.dart';
 
 class CheckInternetPage extends StatefulWidget {
   const CheckInternetPage({Key? key}) : super(key: key);
@@ -20,6 +23,7 @@ class _CheckInternetPageState extends State<CheckInternetPage> {
   //-------------------------
   final Connectivity _connectivity = Connectivity();
   late Future<ConnectivityResult> _connectivityFuture;
+  final LottieAnimation lottieAnimation = LottieAnimation();
   Timer? _internetCheckTimer;
 
   //-------------------------------
@@ -44,18 +48,30 @@ class _CheckInternetPageState extends State<CheckInternetPage> {
   //-------------------------
   // Check Internet Connection
   //-------------------------
+
   Future<void> _checkInternetAndNavigate() async {
     try {
       var connectivityResult = await _connectivity.checkConnectivity();
       if (connectivityResult != ConnectivityResult.none) {
         _internetCheckTimer?.cancel();
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const SplashScreen()),
-        );
+
+        // Check for updates after confirming internet connection
+        final AppUpdateInfo updateInfo = await InAppUpdate.checkForUpdate();
+        if (updateInfo.updateAvailability ==
+            UpdateAvailability.updateAvailable) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => UpdateApplication()),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const SplashScreen()),
+          );
+        }
       }
     } catch (e) {
-      print('Failed to check internet connection: $e');
+      rethrow;
     }
   }
 
@@ -102,7 +118,7 @@ class _CheckInternetPageState extends State<CheckInternetPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Lottie.asset(
-              'assets/animation/no_internet3.json',
+              lottieAnimation.checkInternet,
             ),
           ],
         ),

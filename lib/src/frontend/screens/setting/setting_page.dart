@@ -206,7 +206,6 @@ class SettingPage extends StatelessWidget {
                           ),
                           onPressed: () {
                             _auth.signOut();
-
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

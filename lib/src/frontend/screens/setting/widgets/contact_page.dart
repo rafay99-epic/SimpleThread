@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simplethread/src/backend/services/contactMessage/contactMessage.dart';
+import 'package:simplethread/src/constants/animation/lottie_animation.dart';
 import 'package:simplethread/src/constants/widget/textfeild/customtextfeild2.dart';
 import 'package:simplethread/src/constants/widget/appbar/my_appbar.dart';
 
@@ -15,6 +16,7 @@ class ContactPage extends StatelessWidget {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final messageController = TextEditingController();
+  final LottieAnimation lottieAnimation = LottieAnimation();
 
   void sendMessage(BuildContext context) async {
     try {
@@ -86,7 +88,7 @@ class ContactPage extends StatelessWidget {
             children: <Widget>[
               Container(
                 child: Lottie.asset(
-                  'assets/animation/login_message.json',
+                  lottieAnimation.feedback,
                   width: 150,
                   height: 150,
                 ),
