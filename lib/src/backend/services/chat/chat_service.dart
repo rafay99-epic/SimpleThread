@@ -1,27 +1,13 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:simplethread/src/backend/model/message.dart';
 
 class ChatService {
-  // get firestore instance
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  //getting the user id
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-/*
-! I've worked on this code for ten hours. Please don't alter the structure. If you do decide to alter the code, you should add the necessary time to this counter. 
-! Counter: 0h
-
-! Code Fixed By @Smalick0478
-! Reduce Hour Counter if you have fixed the code 😊
-
-* Stream<List<Map<String, dynamic>>>
-
-*This code goes through each document that a user has in the firestore by 
-*navigating across them.
-
-*/
-  //get user stream or data from the database
   Stream<List<Map<String, dynamic>>> getUserStream() {
     return _firestore.collection('Users').snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
@@ -33,14 +19,48 @@ class ChatService {
     });
   }
 
-  //send message to different Users
+  // Stream<Set<Map<String, dynamic>>> getUserStreamMessage() {
+  //   final String currentUserId = _auth.currentUser!.uid;
+  //   StreamController<Set<Map<String, dynamic>>> controller = StreamController();
+
+  //   _firestore
+  //       .collection('chat_rooms')
+  //       .where('senderID', isEqualTo: currentUserId)
+  //       .snapshots()
+  //       .listen((snapshot) async {
+  //     Set<Map<String, dynamic>> users = {};
+  //     print("------------------------------------------------");
+  //     print('chat_rooms docs: ${snapshot.docs.length}');
+  //     print("-------------------------------------------------");
+
+  //     for (var chatRoomDoc in snapshot.docs) {
+  //       print("--------------------------------------------");
+  //       print('chatRoomDoc id: ${chatRoomDoc.id}');
+  //       print("--------------------------------------------");
+  //       final otherUserID = chatRoomDoc.data()['reciverID'];
+  //       print('otherUserID: $otherUserID');
+  //       final otherUserDoc =
+  //           await _firestore.collection('Users').doc(otherUserID).get();
+  //       if (otherUserDoc.exists && !users.contains(otherUserDoc.data())) {
+  //         users.add(otherUserDoc.data()!);
+  //       }
+  //     }
+
+  //     print("-------------------------------");
+  //     print('users: ${users.length}');
+  //     print("-------------------------------");
+
+  //     controller.add(users);
+  //   });
+
+  //   return controller.stream;
+  // }
+
   Future<void> sendMessage(String reciverID, message) async {
-    //getting current user is
     final String currentuserID = _auth.currentUser!.uid;
     final String currentuserEmail = _auth.currentUser!.email!;
     final Timestamp timestamp = Timestamp.now();
 
-    //create a new message
     Message newMessage = Message(
       senderID: currentuserID,
       senderEmail: currentuserEmail,
