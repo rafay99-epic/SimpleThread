@@ -11,4 +11,6 @@ class LottieAnimation {
   String checkInternet = "assets/animation/no_internet3.json";
   //Feedback
   String feedback = "assets/animation/login_message.json";
+  //empty chat
+  String emptyChat = "assets/images/empty_chat.svg";
 }
