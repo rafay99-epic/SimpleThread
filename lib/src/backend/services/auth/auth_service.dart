@@ -23,8 +23,26 @@ class AuthService {
   //----------------------------------
   //  Sign in with Email and Password
   //----------------------------------
+
+  //orginal Code
+
+  // Future<UserCredential> signInWithEmailPassword(
+  //     String email, String password) async {
+  //   try {
+  //     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+  //         email: email, password: password);
+  //     return userCredential;
+  //   } on FirebaseAuthException catch (e) {
+  //     throw Exception(e.code);
+  //   }
+  // }
+
   Future<UserCredential> signInWithEmailPassword(
       String email, String password) async {
+    bool userExists = await doesUserExist(email);
+    if (!userExists) {
+      throw Exception('User does not exist');
+    }
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -32,6 +50,18 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
     }
+  }
+  //-----------------------------
+  // Check the account existing
+  //-----------------------------
+
+  Future<bool> doesUserExist(String email) async {
+    final QuerySnapshot result = await _firestore
+        .collection('Users')
+        .where('email', isEqualTo: email)
+        .get();
+    final List<DocumentSnapshot> documents = result.docs;
+    return documents.length > 0;
   }
 
   //-------------------------------------------------------------

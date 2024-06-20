@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body
+    style="
+      background-color: #f0f0f0;
+      text-align: justify;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    "
+  >
+    <p>Dear %DISPLAY_NAME%,</p>
+
+    <p>Welcome to %APP_NAME%!</p>
+    <p>We're excited to have you on board.</p>
+    <p>
+      To ensure the security of your account and help provide a better
+      experience, we need to verify your email address. Please click the link
+      below to complete the verification process:
+    </p>
+
+    <div style="text-align: center">
+      <a
+        href="%LINK%"
+        style="
+          background-color: #4caf50;
+          color: white;
+          padding: 14px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+        "
+        >Verify Email Address</a
+      >
+    </div>
+
+    <p>Thank you using our Application</p>
+    <p>Best Regards,</p>
+    <p>Your %APP_NAME% Team</p>
+  </body>
+</html>
+
+{{/* Orginal Code for Firebase Template Verfication Email */}} {{/*
+<p>Hello %DISPLAY_NAME%,</p>
+<p>Follow this link to verify your email address.</p>
+<p><a href="%LINK%">%LINK%</a></p>
+<p>If you didn’t ask to verify this address, you can ignore this email.</p>
+<p>Thanks,</p>
+<p>Your %APP_NAME% team</p>
+*/}} {{/* Orgina Firebae Template for Changing Password */}} {{/*
+<p>Hello,</p>
+<p>
+  Follow this link to reset your %APP_NAME% password for your %EMAIL% account.
+</p>
+<p><a href="%LINK%">%LINK%</a></p>
+<p>If you didn’t ask to reset your password, you can ignore this email.</p>
+<p>Thanks,</p>
+<p>Your %APP_NAME% team</p>
+*/}}
